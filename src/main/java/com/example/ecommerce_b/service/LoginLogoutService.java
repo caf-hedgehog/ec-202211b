@@ -21,6 +21,13 @@ public class LoginLogoutService {
 	@Autowired
 	private UserRepository repository;
 
+	/**
+	 * ハッシュ化されたパスワードをもとにログイン判定を行う.
+	 * 
+	 * @param email    メールアドレス
+	 * @param password パスワード
+	 * @return ユーザー情報
+	 */
 	public User login(String email, String password) {
 		User user = repository.findByUser(email);
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();

@@ -21,7 +21,7 @@ public class SecurityConfig {
 
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
-		return web -> web.ignoring().mvcMatchers("/img/**", "/css/**", "/js/**");
+		return web -> web.ignoring().mvcMatchers("/img_pizza/**", "/css/**", "/js/**");
 	}
 
 }
