@@ -34,7 +34,6 @@ public class UserRepository {
 	 * @return ユーザー情報
 	 */
 	public User findByUser(String email) {
-
 		String sql = "SELECT id, name, email, password, zipcode, address, telephone FROM users WHERE email = :email";
 
 		MapSqlParameterSource param = new MapSqlParameterSource().addValue("email", email);
