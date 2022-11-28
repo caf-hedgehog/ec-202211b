@@ -18,25 +18,24 @@ import com.example.ecommerce_b.repository.ItemRepository;
 @Service
 @Transactional
 public class ShowItemListService {
-	
+
 	@Autowired
 	private ItemRepository itemRepository;
-	
+
 	/**
 	 * item情報を全件検索する業務処理と商品名を曖昧検索する業務処理.
 	 * 
 	 * @param name 商品名
-	 * @return 
+	 * @return　商品リスト
 	 */
-	public List<Item> serchByName(String name) {
+	public List<Item> searchByName(String name) {
 		if (name == null) {
-			 List<Item> itemName = itemRepository.findByName(name);
-			 return itemName;
+			List<Item> itemList = itemRepository.findAll();
+			return itemList;
 		}
-		List<Item> itemList = itemRepository.findAll(); 
+
+		List<Item> itemList = itemRepository.findByName(name);
 		return itemList;
 	}
-	
-	
 
 }

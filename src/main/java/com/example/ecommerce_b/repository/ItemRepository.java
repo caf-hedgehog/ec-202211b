@@ -31,9 +31,9 @@ public class ItemRepository {
 		item.setId(rs.getInt("id"));
 		item.setName(rs.getString("name"));
 		item.setDescription(rs.getString("description"));
-		item.setPriceM(rs.getInt("priceM"));
-		item.setPriceL(rs.getInt("priceL"));
-		item.setImagePath(rs.getString("imagePath"));
+		item.setPriceM(rs.getInt("price_m"));
+		item.setPriceL(rs.getInt("price_l"));
+		item.setImagePath(rs.getString("image_path"));
 		item.setDeleted(rs.getBoolean("deleted"));
 		return item;
 	};
@@ -56,10 +56,10 @@ public class ItemRepository {
 	 * @return 商品一覧
 	 */
 	public List<Item> findByName(String name) {
-		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM item WHERE LIKE :name ORDER BY price_m";
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE name LIKE :name ORDER BY price_m";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
-		List<Item> itemName = template.query(sql, param, ITEM_ROWMAPPER);
-		return itemName;
+		List<Item> itemList = template.query(sql, param, ITEM_ROWMAPPER);
+		return itemList;
 	}
 
 }
