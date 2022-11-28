@@ -34,24 +34,35 @@ public class LoginLogoutController {
 	 * @param form リクエストパラメータ
 	 * @return ログイン画面
 	 */
-	@GetMapping("")
+	@RequestMapping("/")
 	public String index(LoginForm form) {
 		return "login";
 	}
 
 	/**
-	 * 商品一覧ページ表示.
+	 * ログイン処理.
 	 * 
 	 * @param form リクエストパラメータ
 	 * @return 商品一覧ページ
 	 */
-	@PostMapping("/login")
+	@PostMapping("/showItemList")
 	public String login(LoginForm form) {
 		User user = service.login(form.getEmail(), form.getPassword());
 		if (user == null) {
-			session.setAttribute("session", user);
-			return index(form);
+			return "redirect:/";
 		}
-		return "item_detail";
+		session.setAttribute("session", user);
+		return "item_list_pizza";
+	}
+
+	/**
+	 * ログアウト処理.
+	 * 
+	 * @return ログイン画面
+	 */
+	@GetMapping("/logout")
+	public String logout() {
+		session.invalidate();
+		return "login";
 	}
 }
