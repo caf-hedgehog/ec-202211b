@@ -52,7 +52,7 @@ public class LoginLogoutController {
 			return "redirect:/";
 		}
 		session.setAttribute("session", user);
-		return "item_list_pizza";
+		return "item_list_curry";
 	}
 
 	/**
@@ -63,6 +63,7 @@ public class LoginLogoutController {
 	@GetMapping("/logout")
 	public String logout() {
 		session.invalidate();
-		return "login";
+//		return "login";
+		return "redirect:/";
 	}
 }
