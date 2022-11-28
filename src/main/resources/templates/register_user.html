@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>ネットでピザ注文</title>
-    <link href="../static/css/bootstrap.css" rel="stylesheet" />
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -32,7 +33,7 @@
               <!-- 企業ロゴ -->
               <img
                 alt="main log"
-                src="../static/img_pizza/header_logo.png"
+                th:src="@{/img_pizza/header_logo.png}"
                 height="35"
               />
             </a>
@@ -59,7 +60,7 @@
           class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
         >
           <div class="well">
-            <form method="post" action="item_list_pizza.html">
+            <form method="post" th:action="@{/insert/register}">
               <fieldset>
                 <legend>ユーザ登録</legend>
                 <div class="form-group">
@@ -71,6 +72,7 @@
                     >名前を入力してください</label
                   >
                   <input
+                    name="name"
                     type="text"
                     id="inputName"
                     class="form-control"
@@ -86,6 +88,7 @@
                     >メールアドレスを入力してください</label
                   >
                   <input
+                    name="email"
                     type="text"
                     id="inputEmail"
                     class="form-control"
@@ -100,8 +103,9 @@
                     for="inputError"
                     >郵便番号を入力してください</label
                   >
-                  <input type="button" value="住所検索" />
+                  <input type="button" id="btn_zipCode" value="住所検索" />
                   <input
+                    name="zipcode"
                     type="text"
                     id="inputZipcode"
                     class="form-control"
@@ -117,6 +121,7 @@
                     >住所を入力してください</label
                   >
                   <input
+                    name="address"
                     type="text"
                     id="inputAddress"
                     class="form-control"
@@ -132,6 +137,7 @@
                     >電話番号を入力してください</label
                   >
                   <input
+                    name="telephone"
                     type="text"
                     id="inputTel"
                     class="form-control"
@@ -147,6 +153,7 @@
                     >パスワードを入力してください</label
                   >
                   <input
+                    name="password"
                     type="text"
                     id="inputPassword"
                     class="form-control"
@@ -164,6 +171,7 @@
                     >確認用パスワードを入力してください</label
                   >
                   <input
+                    name="confirm"
                     type="text"
                     id="inputConfirmationPassword"
                     class="form-control"
@@ -183,5 +191,6 @@
     <!-- end container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
+    <script src="/js/addressSearch.js"></script>
   </body>
 </html>
