@@ -30,6 +30,9 @@ public class LoginLogoutService {
 	 */
 	public User login(String email, String password) {
 		User user = repository.findByUser(email);
+		if (user == null) {
+			return null;
+		}
 		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 		if (bcpe.matches(password, user.getPassword())) {
 			return user;
