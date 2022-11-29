@@ -1,20 +1,19 @@
 package com.example.ecommerce_b.domain;
 
 import java.util.List;
-
 /**
  * 商品情報を表すドメイン.
  * 
  * @author yamaokahayato
  *
  */
-public class Item {
 
-	/** ID */
+public class Item {
+	/** アイテムID */
 	private Integer id;
 	/** 商品名 */
 	private String name;
-	/** メールアドレス */
+	/** 商品説明 */
 	private String description;
 	/** Mの価格 */
 	private Integer priceM;

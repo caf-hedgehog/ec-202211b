@@ -8,7 +8,7 @@ package com.example.ecommerce_b.domain;
  */
 public class Topping {
 
-	/** ID */
+	/** トッピングID */
 	private Integer id;
 	/** トッピング名 */
 	private String name;
