@@ -29,10 +29,11 @@ public class ShowItemDetailController {
 	 * @param model　モデル
 	 * @return　商品詳細画面
 	 */
-	@GetMapping("")
+	@GetMapping("/showItemDetail")
 	public String showItemDetail(Integer id, Model model) {
-		Item itemDetailList = showItemDetailService.detailByItem(id);
-		model.addAttribute("itemDetailList", itemDetailList);
+		Item item = showItemDetailService.detailByItem(id);
+		model.addAttribute("item", item);
+		System.out.println(item);
 		return "item_detail";
 		
 	}
