@@ -1,13 +1,12 @@
 package com.example.ecommerce_b.repository;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.stereotype.Repository;
 
 import com.example.ecommerce_b.domain.OrderTopping;
 
@@ -17,6 +16,7 @@ import com.example.ecommerce_b.domain.OrderTopping;
  * @author 萩田
  *
  */
+@Repository
 public class OrderToppingRepository {
 
 	private static final RowMapper<OrderTopping> ORDER_TOPPING_ROW_MAPPER = new BeanPropertyRowMapper<>(

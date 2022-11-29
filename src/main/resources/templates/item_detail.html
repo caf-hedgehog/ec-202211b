@@ -58,7 +58,11 @@
         <!-- /.container-fluid -->
       </nav>
 
-      <form action="cart_list.html">
+      <form
+        action="cart_list.html"
+        th:action="@{/cart/cart-list}"
+        method="post"
+      >
         <div class="row">
           <div class="col-xs-offset-2 col-xs-8">
             <h3 class="text-center">商品詳細</h3>
@@ -95,12 +99,17 @@
                           type="radio"
                           name="responsibleCompany"
                           checked="checked"
+                          th:value="M"
                         />
                         <span class="price">&nbsp;М&nbsp;</span
                         >&nbsp;&nbsp;1,380円(税抜)
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="responsibleCompany" />
+                        <input
+                          type="radio"
+                          name="responsibleCompany"
+                          th:value="L"
+                        />
                         <span class="price">&nbsp;Ｌ</span
                         >&nbsp;&nbsp;2,380円(税抜)
                       </label>
@@ -123,28 +132,60 @@
                     </div>
                     <div class="col-sm-12">
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />オニオン
+                        <input
+                          type="checkbox"
+                          th:value="1"
+                          name="toppingIdList"
+                        />オニオン
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />チーズ
+                        <input
+                          type="checkbox"
+                          th:value="2"
+                          name="toppingIdList"
+                        />チーズ
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />ピーマン
+                        <input
+                          type="checkbox"
+                          th:value="3"
+                          name="toppingIdList"
+                        />ピーマン
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />ロースハム </label
+                        <input
+                          type="checkbox"
+                          th:value="4"
+                          name="toppingIdList"
+                        />ロースハム </label
                       ><br />
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />ほうれん草
+                        <input
+                          type="checkbox"
+                          th:value="5"
+                          name="toppingIdList"
+                        />ほうれん草
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />ぺパロに
+                        <input
+                          type="checkbox"
+                          th:value="6"
+                          name="toppingIdList"
+                        />ぺパロに
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />グリルナス
+                        <input
+                          type="checkbox"
+                          th:value="7"
+                          name="toppingIdList"
+                        />グリルナス
                       </label>
                       <label class="checkbox-inline">
-                        <input type="checkbox" value="" />あらびきソーセージ
+                        <input
+                          type="checkbox"
+                          th:value="8"
+                          name="toppingIdList"
+                        />あらびきソーセージ
                       </label>
                     </div>
                   </div>

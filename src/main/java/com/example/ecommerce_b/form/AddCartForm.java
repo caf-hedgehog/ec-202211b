@@ -12,9 +12,9 @@ public class AddCartForm {
 	/** 商品ID */
 	private Integer itemId;
 	/** サイズ */
-	private Character size;
+	private Character responsibleCompany;
 	/** 数量 */
-	private Integer quantity;
+	private Integer area;
 	/** トッピングリスト */
 	private List<Integer> toppingIdList;
 
@@ -26,20 +26,20 @@ public class AddCartForm {
 		this.itemId = itemId;
 	}
 
-	public Character getSize() {
-		return size;
+	public Character getResponsibleCompany() {
+		return responsibleCompany;
 	}
 
-	public void setSize(Character size) {
-		this.size = size;
+	public void setResponsibleCompany(Character responsibleCompany) {
+		this.responsibleCompany = responsibleCompany;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
+	public Integer getArea() {
+		return area;
 	}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
+	public void setArea(Integer area) {
+		this.area = area;
 	}
 
 	public List<Integer> getToppingIdList() {
@@ -52,8 +52,8 @@ public class AddCartForm {
 
 	@Override
 	public String toString() {
-		return "AddCartForm [itemId=" + itemId + ", size=" + size + ", quantity=" + quantity + ", toppingIdList="
-				+ toppingIdList + "]";
+		return "AddCartForm [itemId=" + itemId + ", responsibleCompany=" + responsibleCompany + ", area=" + area
+				+ ", toppingIdList=" + toppingIdList + "]";
 	}
 
 }
