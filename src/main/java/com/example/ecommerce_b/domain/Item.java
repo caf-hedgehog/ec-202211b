@@ -1,6 +1,12 @@
 package com.example.ecommerce_b.domain;
 
 import java.util.List;
+/**
+ * 商品情報を表すドメイン.
+ * 
+ * @author yamaokahayato
+ *
+ */
 
 public class Item {
 	/** アイテムID */
@@ -13,11 +19,11 @@ public class Item {
 	private Integer priceM;
 	/** Lの価格 */
 	private Integer priceL;
-	/** 画像のパス */
+	/** 画像パス */
 	private String imagePath;
 	/** 削除フラグ */
 	private Boolean deleted;
-	/** トッピングリスト */
+	/** トッピングリスト　*/
 	private List<Topping> toppingList;
 
 	public Integer getId() {

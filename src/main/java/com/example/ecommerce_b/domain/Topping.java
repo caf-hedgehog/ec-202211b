@@ -1,6 +1,13 @@
 package com.example.ecommerce_b.domain;
 
+/**
+ * トッピング情報を表すドメイン.
+ * 
+ * @author yamaokahayato
+ *
+ */
 public class Topping {
+
 	/** トッピングID */
 	private Integer id;
 	/** トッピング名 */
