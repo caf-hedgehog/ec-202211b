@@ -19,6 +19,22 @@ public class OrderItem {
 	/** 注文トッピングリスト */
 	private List<OrderTopping> orderToppingList;
 
+	public OrderItem() {
+
+	}
+
+	public OrderItem(Integer id, Integer itemId, Integer orderId, Integer quantity, Character size, Item item,
+			List<OrderTopping> orderToppingList) {
+		this.id = id;
+		this.itemId = itemId;
+		this.orderId = orderId;
+		this.quantity = quantity;
+		this.size = size;
+		this.item = item;
+		this.orderToppingList = orderToppingList;
+
+	}
+
 	// 合計金額
 	public Integer getSubTotal() {
 		List<OrderTopping> orderToppingList = new ArrayList<>();

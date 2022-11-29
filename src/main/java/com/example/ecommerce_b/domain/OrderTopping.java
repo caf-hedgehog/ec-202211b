@@ -10,6 +10,17 @@ public class OrderTopping {
 	/** トッピング */
 	private Topping topping;
 
+	public OrderTopping() {
+
+	}
+
+	public OrderTopping(Integer id, Integer toppingId, Integer orderItemId, Topping topping) {
+		this.id = id;
+		this.toppingId = toppingId;
+		this.orderItemId = orderItemId;
+		this.topping = topping;
+	}
+
 	public Integer getId() {
 		return id;
 	}
