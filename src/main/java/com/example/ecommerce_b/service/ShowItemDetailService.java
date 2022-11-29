@@ -30,6 +30,7 @@ public class ShowItemDetailService {
 	public Item detailByItem(Integer id) {
 		Item item = itemRepository.load(id);
 		List<Topping> toppingList = toppingRepository.findAll();
+		item.setToppingList(toppingList);
 		return item;
 	}
 
