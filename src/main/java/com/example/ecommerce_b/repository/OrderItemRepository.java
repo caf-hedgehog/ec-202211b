@@ -1,11 +1,11 @@
 package com.example.ecommerce_b.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -53,6 +53,19 @@ public class OrderItemRepository {
 		String sql = "DELETE FROM order_items WHERE id = :id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		template.update(sql, param);
+	}
+
+	/**
+	 * 注文商品を取得.
+	 * 
+	 * @param orderId 注文ID
+	 * @return 注文商品情報
+	 */
+	public OrderItem findByorderId(Integer orderId) {
+		String sql = "SELECT item_id, order_id, quantity, size FROM order_items WHERE order_id = :orderId";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("orderId", orderId);
+		List<OrderItem> orderItemList = template.query(sql, param, ORDER_ITEM_ROW_MAPPER);
+		return orderItemList.get(0);
 	}
 
 }
