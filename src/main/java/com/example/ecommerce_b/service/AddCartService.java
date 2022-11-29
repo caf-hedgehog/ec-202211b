@@ -1,19 +1,15 @@
 package com.example.ecommerce_b.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.ecommerce_b.domain.Item;
 import com.example.ecommerce_b.domain.Order;
 import com.example.ecommerce_b.domain.OrderItem;
 import com.example.ecommerce_b.domain.OrderTopping;
-import com.example.ecommerce_b.domain.Topping;
 import com.example.ecommerce_b.form.AddCartForm;
+import com.example.ecommerce_b.repository.ItemRepository;
 import com.example.ecommerce_b.repository.OrderItemRepository;
 import com.example.ecommerce_b.repository.OrderRepository;
 import com.example.ecommerce_b.repository.OrderToppingRepository;
@@ -37,19 +33,44 @@ public class AddCartService {
 	private OrderToppingRepository orderToppingRepository;
 	@Autowired
 	private ToppingRepository toppingRepository;
+	@Autowired
+	private ItemRepository itemRepository;
 
+	/**
+	 * カートに追加する.
+	 * 
+	 * @param form   リクエストフォーム
+	 * @param userId ユーザーID
+	 */
 	public void AddOrder(AddCartForm form, Integer userId) {
-		List<OrderTopping> orderToppings = new ArrayList<>();
-		List<OrderItem> orderItems = new ArrayList<>();
+		// List<OrderTopping> orderToppings = new ArrayList<>();
+		// List<OrderItem> orderItems = new ArrayList<>();
+
+		Item item = itemRepository.load(1);// form.getItemId()
 		Order order = new Order();
+		order.setUserId(userId);
+		order.setTotalPrice(0);
+		order.setStatus(0);
+		order = orderRepository.insert(order);
+
+//		for (int i = 0; i < form.getToppingIdList().size(); i++) {
+//			orderToppings.add(new OrderTopping(null, form.getToppingIdList().get(i), order.getId(),
+//					toppingRepository.load(form.getToppingIdList().get(i))));
+//		}
+//		orderItems.add(new OrderItem(null, 1/* form.getItemId() */, order.getId(), form.getArea(),
+//				form.getResponsibleCompany(), item, orderToppings));
+
+		// order.setOrderItemList(orderItems);
+		OrderItem orderItem = new OrderItem(null, 1/* form.getItemId() */, order.getId(), form.getArea(),
+				form.getResponsibleCompany(), item, null);
+		orderItemRepository.insert(orderItem);
+
+		OrderTopping orderTopping = new OrderTopping();
 		for (int i = 0; i < form.getToppingIdList().size(); i++) {
-			orderToppings.add(new OrderTopping(null, form.getToppingIdList().get(i), null,
-					toppingRepository.load(form.getToppingIdList().get(i))));
+			orderTopping = new OrderTopping(null, form.getToppingIdList().get(i), order.getId(),
+					toppingRepository.load(form.getToppingIdList().get(i)));
+			orderToppingRepository.insert(orderTopping);// 回す
 		}
-		orderItems.add(
-				new OrderItem(null, null, null, form.getArea(), form.getResponsibleCompany(), null, orderToppings));
-		order.setOrderItemList(orderItems);
-		System.out.println(order);
 	}
 
 }
