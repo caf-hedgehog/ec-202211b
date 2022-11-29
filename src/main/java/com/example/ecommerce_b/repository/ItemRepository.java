@@ -1,5 +1,6 @@
 package com.example.ecommerce_b.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.ecommerce_b.domain.Item;
+import com.example.ecommerce_b.domain.Topping;
 
 /**
  * itemsテーブルを操作するリポジトリ.
@@ -60,6 +62,19 @@ public class ItemRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
 		List<Item> itemList = template.query(sql, param, ITEM_ROWMAPPER);
 		return itemList;
+	}
+	
+	/**
+	 * 主キー検索を行う.
+	 * 
+	 * @param id ID
+	 * @return 検索された商品情報
+	 */
+	public Item load(Integer id) {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items WHERE id =: id";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		Item item = template.queryForObject(sql, param, ITEM_ROWMAPPER);
+		return item;
 	}
 
 }
