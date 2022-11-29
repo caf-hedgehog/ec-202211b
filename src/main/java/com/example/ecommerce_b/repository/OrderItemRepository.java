@@ -41,6 +41,7 @@ public class OrderItemRepository {
 	public void insert(OrderItem orderItem) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(orderItem);
 		String sql = "INSERT INTO order_items(item_id, order_id, quantity, size) VALUES(:itemId, :orderId, :quantity, :size)";
+		template.update(sql, param);
 	}
 
 	/*
@@ -51,7 +52,6 @@ public class OrderItemRepository {
 	public void deleteById(Integer id) {
 		String sql = "DELETE FROM order_items WHERE id = :id;";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-
 		template.update(sql, param);
 	}
 
