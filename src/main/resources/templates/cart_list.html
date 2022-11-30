@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -60,6 +60,9 @@
       </nav>
 
       <!-- table -->
+      <form th:action="@{/order-confirm/order}" method="POST">
+  
+      
       <div class="row">
         <div
           class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
@@ -83,6 +86,7 @@
                 <th></th>
               </tr>
               <tr th:each="cartDetail, stat : ${cartList.orderItemList}">
+              <input type="hidden" name="orderId" th:value="${cartDetail.orderId}" /> 
                 <td>
                   <div class="center">
                     <img
@@ -95,6 +99,7 @@
                     <span th:text="${cartDetail.item.name}"></span>
                   </div>
                 </td>
+                
                 <td>
                   <span class="price" th:text="${cartDetail.size}">
                     &nbsp;Ｌ</span
@@ -143,6 +148,7 @@
           </table>
         </div>
       </div>
+       
 
       <div class="row">
         <div class="col-xs-offset-2 col-xs-8">
@@ -156,17 +162,20 @@
       <div class="row">
         <div class="col-xs-offset-5 col-xs-3">
           <div class="form-group">
-            <form action="order_confirm.html">
+            
               <input
                 class="form-control btn btn-warning btn-block"
                 type="submit"
                 value="注文に進む"
               />
-            </form>
+          
           </div>
         </div>
       </div>
+      </form>
     </div>
+    
+   
     <!-- end container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
