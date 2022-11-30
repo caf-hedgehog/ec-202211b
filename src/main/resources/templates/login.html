@@ -67,9 +67,14 @@
             >
               <fieldset>
                 <legend>ログイン</legend>
-                <label class="control-label" style="color: red" for="inputError"
-                  >メールアドレス、またはパスワードが間違っています</label
+                <label
+                  th:if="${loginError}"
+                  class="control-label"
+                  style="color: red"
+                  for="inputError"
                 >
+                  <span th:text="${loginError}"></span>
+                </label>
                 <div class="form-group">
                   <label for="inputEmail">メールアドレス:</label>
                   <input
@@ -84,7 +89,7 @@
                   <label for="inputPassword">パスワード:</label>
                   <input
                     name="password"
-                    type="text"
+                    type="password"
                     id="inputPassword"
                     class="form-control"
                     placeholder="Password"
