@@ -50,7 +50,7 @@ public class ShowCartListService {
 		Order order = orderRepository.findByStatusAndUserId(status, userId).get(0);
 
 		// 注文商品リストにオーダーIDと一致する商品を取得
-		List<OrderItem> orderItemList = orderItemRepository.findByorderId(order.getId());
+		List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());
 
 		List<Item> itemList = new ArrayList<>();
 
