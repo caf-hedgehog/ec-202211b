@@ -23,6 +23,7 @@ public class ShowCartListController {
 
 	@GetMapping("")
 	public String index(Model model) {
+		System.out.println("-------->" + showCartListService.showCartList(1, 0));
 		model.addAttribute("cartList", showCartListService.showCartList(1, 0));
 		return "cart_list";
 	}

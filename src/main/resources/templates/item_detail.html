@@ -74,7 +74,12 @@
         <!-- /.container-fluid -->
       </nav>
 
-      <form action="cart_list.html">
+      <form
+        action="cart_list.html"
+        th:action="@{/cart/cart-list}"
+        method="post"
+      >
+        <input type="hidden" name="itemId" th:value="${item.id}" />
         <div class="row">
           <div class="col-xs-offset-2 col-xs-8">
             <h3 class="text-center">商品詳細</h3>
@@ -110,13 +115,18 @@
                         <input
                           type="radio"
                           name="responsibleCompany"
+                          value="M"
                           checked="checked"
                         />
                         <span class="price">&nbsp;М&nbsp;</span
                         >&nbsp;&nbsp;1,380円(税抜)
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="responsibleCompany" />
+                        <input
+                          type="radio"
+                          name="responsibleCompany"
+                          value="L"
+                        />
                         <span class="price">&nbsp;Ｌ</span
                         >&nbsp;&nbsp;2,380円(税抜)
                       </label>
@@ -145,8 +155,9 @@
                         <input
                           th:text="${topping.name}"
                           type="checkbox"
-                          value=""
-                        />オニオン
+                          th:value="${topping.id}"
+                          name="toppingIdList"
+                        />
                       </label>
                     </div>
                   </div>
