@@ -18,7 +18,7 @@ import com.example.ecommerce_b.domain.Order;
 /**
  * ordersテーブルを操作するレポジトリ.
  * 
- * @author 萩田
+ * @author 萩田, shibatamasayuki
  *
  */
 @Repository
@@ -58,11 +58,23 @@ public class OrderRepository {
 		String sql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method FROM orders WHERE user_id=:userId AND status=:status ORDER BY id DESC";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId).addValue("status", status);
 		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
-		if(orderList.size() == 0) {
+		if (orderList.size() == 0) {
 			return null;
 		}
-		
+
 		return orderList.get(0);
+	}
+
+	/**
+	 * 引数で受け取ったidと一致するオーダーを検索して1件取得.
+	 *
+	 * @param id orderのid
+	 * @return idが一致するオーダー
+	 */
+	public Order load(Integer id) {
+		String sql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method FROM orders WHERE id = :id;";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		return template.queryForObject(sql, param, ORDER_ROW_MAPPER);
 	}
 
 }
