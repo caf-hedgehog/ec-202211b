@@ -18,14 +18,14 @@ import com.example.ecommerce_b.repository.OrderToppingRepository;
 import com.example.ecommerce_b.repository.ToppingRepository;
 
 /**
- * ordersテーブルを操作するレポジトリ.
+ * ordersテーブルを操作するサービス.
  * 
  * @author 萩田
  *
  */
 @Transactional
 @Service
-public class ShowCartListService {
+public class OrderHistoryService {
 
 	@Autowired
 	private OrderRepository orderRepository;
@@ -38,21 +38,14 @@ public class ShowCartListService {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	/**
-	 * 注文表を取得.
-	 * 
-	 * @param userId ユーザーID
-	 * @param status ステータスID
-	 * @return
-	 */
-	public Order showCartList(Integer userId, Integer status) {
+	public List<Order> showOrderHistory(Integer userId, Integer status) {
 		// ユーザーIDとステータスから注文前の情報を取得
-		Order order = orderRepository.findByStatusAndUserId(status, userId).get(0);
-
+		List<Order> orders = orderRepository.findByStatusAndUserId(status, userId);
 		// 注文商品リストにオーダーIDと一致する商品を取得
-		List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());
-
-		List<Item> itemList = new ArrayList<>();
+		List<OrderItem> orderItemList = new ArrayList<>();
+		for (int i = 0; i < orders.size(); i++) {
+			orderItemList.add(orderItemRepository.findByorderId(orders.get(i).getId()).get(0));
+		}
 
 		for (int i = 0; i < orderItemList.size(); i++) {
 			// トッピングリストを取得
@@ -63,12 +56,18 @@ public class ShowCartListService {
 				orderToppingList.get(j).setTopping(toppinRepository.load(orderToppingList.get(j).getToppingId()));
 			}
 			orderItemList.get(i).setOrderToppingList(orderToppingList);
+
+			List<Item> itemList = new ArrayList<>();
 			itemList.add(itemRepository.load(orderItemList.get(i).getItemId()));
-			orderItemList.get(i).setItem(itemList.get(i));
+
+			orderItemList.get(i).setItem(itemList.get(0));
+
 		}
-
-		order.setOrderItemList(orderItemList);
-		return order;
+		for (int i = 0; i < orders.size(); i++) {
+			List<OrderItem> tmp = new ArrayList<>();
+			tmp.add(orderItemList.get(i));
+			orders.get(i).setOrderItemList(tmp);
+		}
+		return orders;
 	}
-
 }

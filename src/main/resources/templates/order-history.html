@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -64,14 +64,11 @@
       </nav>
 
       <!-- table -->
-      <form th:action="@{/order-confirm/order}" method="POST">
-  
-      
       <div class="row">
         <div
           class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
         >
-          <h3 class="text-center">ショッピングカート</h3>
+          <h3 class="text-center">注文履歴</h3>
           <table class="table table-striped item-list-table">
             <tbody>
               <tr>
@@ -89,42 +86,55 @@
                 </th>
                 <th></th>
               </tr>
-              <tr th:each="cartDetail, stat : ${cartList.orderItemList}">
-              <input type="hidden" name="orderId" th:value="${cartDetail.orderId}" /> 
+              <tr th:each="orderItem : ${orders}">
                 <td>
                   <div class="center">
                     <img
                       src="../static/img_pizza/1.jpg"
                       class="img-responsive img6-rounded item-img-center"
-                      th:src="@{/img_curry/} + ${cartDetail.item.imagePath}"
+                      th:src="@{/img_curry/} + ${orderItem.orderItemList[0].item.imagePath}"
                       width="100"
                       height="300"
                     /><br />
-                    <span th:text="${cartDetail.item.name}"></span>
+                    <span
+                      th:text="${orderItem.orderItemList[0].item.name}"
+                    ></span>
                   </div>
                 </td>
-                
                 <td>
-                  <span class="price" th:text="${cartDetail.size}">
+                  <span
+                    class="price"
+                    th:text="${orderItem.orderItemList[0].size}"
+                  >
                     &nbsp;Ｌ</span
                   >
                   &nbsp;&nbsp;
-                  <span th:if="${cartDetail.size} == 'M'">
-                    <span th:text="${cartDetail.item.priceM}"></span>円
+                  <span th:if="${orderItem.orderItemList[0].size} == 'M'">
+                    <span
+                      th:text="${orderItem.orderItemList[0].item.priceM}"
+                    ></span
+                    >円
                   </span>
-                  <span th:if="${cartDetail.size} == 'L'">
-                    <span th:text="${cartDetail.item.priceL}"></span>円
+                  <span th:if="${orderItem.orderItemList[0].size} == 'L'">
+                    <span
+                      th:text="${orderItem.orderItemList[0].item.priceL}"
+                    ></span
+                    >円
                   </span>
-                  &nbsp;&nbsp; <span th:text="${cartDetail.quantity}"></span>個
+                  &nbsp;&nbsp;
+                  <span th:text="${orderItem.orderItemList[0].quantity}"></span
+                  >個
                 </td>
                 <td>
                   <ul>
-                    <li th:each="toppingList : ${cartDetail.orderToppingList}">
+                    <li
+                      th:each="toppingList : ${orderItem.orderItemList[0].orderToppingList}"
+                    >
                       <span th:text="${toppingList.topping.name}"></span>
-                      <span th:if="${cartDetail.size} == 'M'">
+                      <span th:if="${orderItem.orderItemList[0].size} == 'M'">
                         <span th:text="${toppingList.topping.priceM}"></span>円
                       </span>
-                      <span th:if="${cartDetail.size} == 'L'">
+                      <span th:if="${orderItem.orderItemList[0].size} == 'L'">
                         <span th:text="${toppingList.topping.priceL}"></span>円
                       </span>
                     </li>
@@ -140,8 +150,8 @@
                         type="submit"
                         class="btn btn-primary"
                         name="orderItemId"
-                        th:value="${cartDetail.id}"
                       >
+                        <!--  th:value="${cartDetail.id}" -->
                         削除
                       </button>
                     </form>
@@ -152,7 +162,6 @@
           </table>
         </div>
       </div>
-       
 
       <div class="row">
         <div class="col-xs-offset-2 col-xs-8">
@@ -166,20 +175,17 @@
       <div class="row">
         <div class="col-xs-offset-5 col-xs-3">
           <div class="form-group">
-            
+            <form action="order_confirm.html">
               <input
                 class="form-control btn btn-warning btn-block"
                 type="submit"
                 value="注文に進む"
               />
-          
+            </form>
           </div>
         </div>
       </div>
-      </form>
     </div>
-    
-   
     <!-- end container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
