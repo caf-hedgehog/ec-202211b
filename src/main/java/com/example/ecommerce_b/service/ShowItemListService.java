@@ -44,8 +44,8 @@ public class ShowItemListService {
 	 * @param order
 	 * @return　商品一覧
 	 */
-	public List<Item> itemSort(String order) {
-		List<Item> itemList = itemRepository.findAll(order);
+	public List<Item> itemSort(String sort) {
+		List<Item> itemList = itemRepository.findAll(sort);
 		return itemList;
 	}
 
