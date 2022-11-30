@@ -19,8 +19,8 @@ public class OrderHistoryController {
 	private OrderHistoryService orderHistoryService;
 
 	@GetMapping("")
-	public String showOrder(Model model) {
-		List<Order> orders = orderHistoryService.showOrderHistory(1, 2);
+	public String showOrder(Model model, Integer userId) {
+		List<Order> orders = orderHistoryService.showOrderHistory(userId, 2);// statusどうしよう。。。
 		model.addAttribute("orders", orders);
 		return "order-history";
 	}
