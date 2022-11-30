@@ -1,15 +1,17 @@
 package com.example.ecommerce_b.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.ecommerce_b.domain.Item;
 import com.example.ecommerce_b.domain.Order;
 import com.example.ecommerce_b.domain.OrderItem;
 import com.example.ecommerce_b.domain.OrderTopping;
-import com.example.ecommerce_b.domain.Topping;
+import com.example.ecommerce_b.repository.ItemRepository;
 import com.example.ecommerce_b.repository.OrderItemRepository;
 import com.example.ecommerce_b.repository.OrderRepository;
 import com.example.ecommerce_b.repository.OrderToppingRepository;
@@ -33,6 +35,8 @@ public class ShowCartListService {
 	private OrderToppingRepository orderToppingRepository;
 	@Autowired
 	private ToppingRepository toppinRepository;
+	@Autowired
+	private ItemRepository itemRepository;
 
 	/**
 	 * 注文表を取得.
@@ -42,17 +46,28 @@ public class ShowCartListService {
 	 * @return
 	 */
 	public Order showCartList(Integer userId, Integer status) {
+		// ユーザーIDとステータスから注文前の情報を取得
 		Order order = orderRepository.findByStatusAndUserId(status, userId);
-		OrderItem orderItem = orderItemRepository.findByorderId(order.getId());
-		List<OrderTopping> orderToppingList = orderToppingRepository.findByOrderId(order.getId());
 
-		for (int i = 0; i < orderToppingList.size(); i++) {
-			orderToppingList.get(i).setTopping(toppinRepository.load(orderToppingList.get(i).getToppingId()));
+		// 注文商品リストにオーダーIDと一致する商品を取得
+		List<OrderItem> orderItemList = orderItemRepository.findByorderId(order.getId());
+
+		List<Item> itemList = new ArrayList<>();
+
+		for (int i = 0; i < orderItemList.size(); i++) {
+			// トッピングリストを取得
+			List<OrderTopping> orderToppingList = orderToppingRepository
+					.findByOrderItemId(orderItemList.get(i).getId());
+
+			for (int j = 0; j < orderToppingList.size(); j++) {
+				orderToppingList.get(j).setTopping(toppinRepository.load(orderToppingList.get(j).getToppingId()));
+			}
+			orderItemList.get(i).setOrderToppingList(orderToppingList);
+			itemList.add(itemRepository.load(orderItemList.get(i).getItemId()));
+			orderItemList.get(i).setItem(itemList.get(i));
 		}
 
-		System.out.println("order-->" + order);
-		System.out.println("orderItem-->" + orderItem);
-		System.out.println("orderTopping-->" + orderToppingList);
+		order.setOrderItemList(orderItemList);
 		return order;
 	}
 

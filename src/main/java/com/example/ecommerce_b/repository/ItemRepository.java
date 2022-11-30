@@ -40,7 +40,7 @@ public class ItemRepository {
 	 * @return 商品情報
 	 */
 	public Item load(Integer id) {
-		String sql = "SELECT id, name, price_m, price_l ,deleted ,description FROM items WHERE id = :id";
+		String sql = "SELECT id, name, price_m, price_l, image_path,deleted ,description FROM items WHERE id = :id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Item item = template.queryForObject(sql, param, ITEM_ROW_MAPPER);
 		return item;

@@ -2,6 +2,7 @@ package com.example.ecommerce_b.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,8 +22,8 @@ public class ShowCartListController {
 	private ShowCartListService showCartListService;
 
 	@GetMapping("")
-	public String index() {
-		showCartListService.showCartList(1, 0);
+	public String index(Model model) {
+		model.addAttribute("cartList", showCartListService.showCartList(1, 0));
 		return "cart_list";
 	}
 

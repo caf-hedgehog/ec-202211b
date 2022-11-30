@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.example.ecommerce_b.domain.OrderItem;
@@ -38,10 +40,18 @@ public class OrderItemRepository {
 	 * 
 	 * @param orderItem 注文商品
 	 */
-	public void insert(OrderItem orderItem) {
+	public OrderItem insert(OrderItem orderItem) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(orderItem);
-		String sql = "INSERT INTO order_items(item_id, order_id, quantity, size) VALUES(:itemId, :orderId, :quantity, :size)";
-		template.update(sql, param);
+		if (orderItem.getId() == null) {
+			String sql = "INSERT INTO order_items(item_id, order_id, quantity, size) VALUES(:itemId, :orderId, :quantity, :size)";
+			KeyHolder keyHolder = new GeneratedKeyHolder();
+			String keyColumnNames[] = { "id" };
+			template.update(sql, param, keyHolder, keyColumnNames);
+			orderItem.setId(keyHolder.getKey().intValue());
+		} else {
+
+		}
+		return orderItem;
 	}
 
 	/*
@@ -61,11 +71,11 @@ public class OrderItemRepository {
 	 * @param orderId 注文ID
 	 * @return 注文商品情報
 	 */
-	public OrderItem findByorderId(Integer orderId) {
-		String sql = "SELECT item_id, order_id, quantity, size FROM order_items WHERE order_id = :orderId";
+	public List<OrderItem> findByorderId(Integer orderId) {
+		String sql = "SELECT id, item_id, order_id, quantity, size FROM order_items WHERE order_id = :orderId";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("orderId", orderId);
 		List<OrderItem> orderItemList = template.query(sql, param, ORDER_ITEM_ROW_MAPPER);
-		return orderItemList.get(0);
+		return orderItemList;
 	}
 
 }

@@ -44,19 +44,24 @@ public class AddCartService {
 	 */
 	public void AddOrder(AddCartForm form, Integer userId) {
 		Item item = itemRepository.load(1);// form.getItemId()
+		System.out.println(item);
 		Order order = new Order();
 		order.setUserId(userId);
 		order.setTotalPrice(0);
 		order.setStatus(0);
-		order = orderRepository.insert(order);
-
-		OrderItem orderItem = new OrderItem(null, 1/* form.getItemId() */, order.getId(), form.getArea(),
-				form.getResponsibleCompany(), item, null);
+		// 初めて登録するか判定
+		if (orderRepository.findByStatusAndUserId(0, userId) == null) {
+			order = orderRepository.insert(order);
+		}
+		// order = orderRepository.insert(order);
+		OrderItem orderItem = new OrderItem(null, item.getId(),
+				orderRepository.findByStatusAndUserId(0, userId).getId(), form.getArea(), form.getResponsibleCompany(),
+				item, null);
 		orderItemRepository.insert(orderItem);
 
 		OrderTopping orderTopping = new OrderTopping();
 		for (int i = 0; i < form.getToppingIdList().size(); i++) {
-			orderTopping = new OrderTopping(null, form.getToppingIdList().get(i), order.getId(),
+			orderTopping = new OrderTopping(null, form.getToppingIdList().get(i), orderItem.getId(),
 					toppingRepository.load(form.getToppingIdList().get(i)));
 			orderToppingRepository.insert(orderTopping);// 回す
 		}
