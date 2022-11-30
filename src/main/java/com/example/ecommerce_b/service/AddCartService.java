@@ -43,7 +43,8 @@ public class AddCartService {
 	 * @param userId ユーザーID
 	 */
 	public void AddOrder(AddCartForm form, Integer userId) {
-		Item item = itemRepository.load(1);// form.getItemId()
+		System.out.println(form);
+		Item item = itemRepository.load(form.getItemId());// form.getItemId()
 		System.out.println(item);
 		Order order = new Order();
 		order.setUserId(userId);
@@ -53,7 +54,6 @@ public class AddCartService {
 		if (orderRepository.findByStatusAndUserId(0, userId) == null) {
 			order = orderRepository.insert(order);
 		}
-		// order = orderRepository.insert(order);
 		OrderItem orderItem = new OrderItem(null, item.getId(),
 				orderRepository.findByStatusAndUserId(0, userId).getId(), form.getArea(), form.getResponsibleCompany(),
 				item, null);

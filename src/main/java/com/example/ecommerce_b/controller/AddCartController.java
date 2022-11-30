@@ -31,7 +31,7 @@ public class AddCartController {
 	public String addCart(AddCartForm form) {
 		System.out.println(form);
 		addCartService.AddOrder(form, 1/* ユーザーID */);
-		return "cart_list";
+		return "redirect:/show-cart";
 	}
 
 }
