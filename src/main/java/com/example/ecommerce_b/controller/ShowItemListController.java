@@ -40,8 +40,8 @@ public class ShowItemListController {
 	 * @return 商品一覧画面
 	 */
 	@RequestMapping("/showList")
-	public String showList(String name, Model model) {
-		List<Item> itemList = showItemListService.searchByName(name);
+	public String showList(String itemName, Model model) {
+		List<Item> itemList = showItemListService.searchByName(itemName);
 		model.addAttribute("itemList", itemList);
 		return "item_list_curry";
 	}
