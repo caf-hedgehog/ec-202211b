@@ -39,9 +39,9 @@ public class ShowItemListController {
 	 * @param model
 	 * @return 商品一覧画面
 	 */
-	@PostMapping("/showList")
-	public String showList(String itemName, Model model) {
-		List<Item> itemList = showItemListService.searchByName(itemName);
+	@RequestMapping("/showList")
+	public String showList(String name, Model model) {
+		List<Item> itemList = showItemListService.searchByName(name);
 		model.addAttribute("itemList", itemList);
 		return "item_list_curry";
 	}
