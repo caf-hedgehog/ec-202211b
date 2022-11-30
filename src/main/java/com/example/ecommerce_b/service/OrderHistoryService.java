@@ -44,7 +44,7 @@ public class OrderHistoryService {
 		// 注文商品リストにオーダーIDと一致する商品を取得
 		List<OrderItem> orderItemList = new ArrayList<>();
 		for (int i = 0; i < orders.size(); i++) {
-			orderItemList.add(orderItemRepository.findByorderId(orders.get(i).getId()).get(0));
+			orderItemList.add(orderItemRepository.findByOrderId(orders.get(i).getId()).get(0));
 		}
 
 		for (int i = 0; i < orderItemList.size(); i++) {
