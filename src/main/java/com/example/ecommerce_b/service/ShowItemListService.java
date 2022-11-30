@@ -37,5 +37,16 @@ public class ShowItemListService {
 		List<Item> itemList = itemRepository.findByName(name);
 		return itemList;
 	}
+	
+	/**
+	 * 商品の並び順を価格の高い順、低い順で並び替える.
+	 * 
+	 * @param order
+	 * @return　商品一覧
+	 */
+	public List<Item> itemSort(String sort) {
+		List<Item> itemList = itemRepository.findAll(sort);
+		return itemList;
+	}
 
 }

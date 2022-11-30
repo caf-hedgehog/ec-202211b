@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,6 +35,20 @@ public class ShowItemListController {
 	@PostMapping("/showList")
 	public String showList(String itemName, Model model) {
 		List<Item> itemList = showItemListService.searchByName(itemName);
+		model.addAttribute("itemList", itemList);
+		return "item_list_curry";
+	}
+
+	/**
+	 * 商品の並び替え欄から送られた内容で商品の並び替えを表示する
+	 * 
+	 * @param order
+	 * @param model モデル
+	 * @return 商品一覧画面
+	 */
+	@PostMapping("/itemSort")
+	public String itemSort(String sort, Model model) {
+		List<Item> itemList = showItemListService.itemSort(sort);
 		model.addAttribute("itemList", itemList);
 		return "item_list_curry";
 	}
