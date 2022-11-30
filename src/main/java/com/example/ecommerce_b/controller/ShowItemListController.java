@@ -50,10 +50,8 @@ public class ShowItemListController {
 	 */
 	@PostMapping("/itemSort") 
 	public String itemSort(String sort, Model model) {
-		System.out.println("sort : " + sort);
 		List<Item> itemList = showItemListService.itemSort(sort);
 		model.addAttribute("itemList", itemList);
-		System.out.println(itemList);
 		return "item_list_curry";
 	}
 	
