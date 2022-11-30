@@ -24,7 +24,14 @@ public class ShowItemListController {
 
 	@Autowired
 	private ShowItemListService showItemListService;
-	
+
+	@GetMapping("/show")
+	public String index(Model model) {
+		List<Item> itemList = showItemListService.searchByName(null);
+		model.addAttribute("itemList", itemList);
+		return "item_list_curry";
+	}
+
 	/**
 	 * 検索欄からの曖昧検索.
 	 * 

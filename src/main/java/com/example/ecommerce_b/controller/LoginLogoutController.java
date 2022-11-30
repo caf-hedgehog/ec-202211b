@@ -54,7 +54,7 @@ public class LoginLogoutController {
 			return "login";
 		}
 		session.setAttribute("session", user);
-		return "forward:/showItemList/showList";
+		return "redirect:/showItemList/show";
 	}
 
 	/**
