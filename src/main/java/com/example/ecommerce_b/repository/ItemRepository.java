@@ -71,10 +71,10 @@ public class ItemRepository {
 	 * @param order　
 	 * @return 商品一覧
 	 */
-	public List<Item> findAll(String order) {
+	public List<Item> findAll(String sort) {
 		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m";
 		
-		if(order.equals("high")  ) {
+		if(sort.equals("high")  ) {
 			sql = sql + " DESC";
 		} 
 		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
