@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,13 +47,14 @@ public class LoginLogoutController {
 	 * @return 商品一覧ページ
 	 */
 	@PostMapping("/showItemList")
-	public String login(LoginForm form) {
+	public String login(LoginForm form, Model model) {
 		User user = service.login(form.getEmail(), form.getPassword());
 		if (user == null) {
-			return "redirect:/";
+			model.addAttribute("loginError", "メールアドレス、またはパスワードが間違っています");
+			return "login";
 		}
 		session.setAttribute("session", user);
-		return "item_list_curry";
+		return "forward:/showItemList/showList";
 	}
 
 	/**

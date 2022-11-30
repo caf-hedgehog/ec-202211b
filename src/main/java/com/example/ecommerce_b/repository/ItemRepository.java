@@ -64,23 +64,22 @@ public class ItemRepository {
 		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
 		return itemList;
 	}
-	
+
 	/**
 	 * 商品一覧の並び順を検索する.
 	 * 
-	 * @param order　
+	 * @param order
 	 * @return 商品一覧
 	 */
 	public List<Item> findAll(String sort) {
 		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m";
-		
-		if(sort.equals("high")  ) {
+
+		if (sort.equals("high")) {
 			sql = sql + " DESC";
-		} 
+		}
 		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
 		return itemList;
-		
+
 	}
-	
 
 }
