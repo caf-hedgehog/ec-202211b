@@ -73,7 +73,7 @@
             </div>
             <div class="panel-body">
               <form
-                method="get"
+                method="post"
                 action="#"
                 class="form-horizontal"
                 th:action="@{/showItemList/showList}"
@@ -86,10 +86,9 @@
                   <div class="col-sm-9">
                     <input
                       type="text"
-                      name="name"
+                      name="itemName"
                       id="code"
                       class="form-control input-sm"
-                      th:value="${name}"
                     />
                   </div>
                 </div>
