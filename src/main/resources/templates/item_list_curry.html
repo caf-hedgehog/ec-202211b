@@ -72,6 +72,17 @@
 									クリア</button>
 							</div>
 						</form>
+
+						<div class="panel-heading">
+							<div class="panel-title">商品の並び替え</div>
+						</div>
+						<form th:action="@{/showItemList/itemSort}" method="post">
+							<select name="sort">
+								<option th:value="high">価格の高い順</option>
+								<option th:value="low">価格の低い順</option>
+							</select>
+							<button type="submit" class="btn btn-primary">並び替え</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -84,14 +95,16 @@
 				<table class="table table-striped item-list-table">
 					<tbody>
 						<tr th:each="item : ${itemList}">
-							<th><a th:href="@{/showItemDetail/showItemDetail?id=} + ${item.id}"> <img
-									th:src="@{/img_curry/} + ${item.imagePath}"
+							<th><a
+								th:href="@{/showItemDetail/showItemDetail?id=} + ${item.id}">
+									<img th:src="@{/img_curry/} + ${item.imagePath}"
 									class="img-responsive img-rounded item-img-center" width="200"
 									height="600" />
-							</a><br /> <a th:href="@{/showItemDetail/showItemDetail?id=} + ${item.id}" th:text="${item.name}"
-								th:field="*{name}">じゃがバターベーコン</a><br /> <span class="price"
-								th:text="${item.priceM}">&nbsp;М&nbsp;</span>&nbsp;&nbsp;1,380円(税抜)<br />
-								<span class="price" th:text="${item.priceL}">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円(税抜)<br />
+							</a><br /> <a
+								th:href="@{/showItemDetail/showItemDetail?id=} + ${item.id}"
+								th:text="${item.name}" th:field="*{name}">じゃがバターベーコン</a><br />
+								<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp;<span th:text="${#numbers.formatInteger(item.priceM, 0, 'COMMA')}">1,380円(税抜)</span>円<br />
+								<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp; <span th:text="${#numbers.formatInteger(item.priceL, 0, 'COMMA')}">2,380円(税抜)</span>円<br />
 							</th>
 						</tr>
 					</tbody>
