@@ -71,7 +71,7 @@ public class OrderItemRepository {
 	 * @param orderId 注文ID
 	 * @return 注文商品情報
 	 */
-	public List<OrderItem> findByorderId(Integer orderId) {
+	public List<OrderItem> findByOrderId(Integer orderId) {
 		String sql = "SELECT id, item_id, order_id, quantity, size FROM order_items WHERE order_id = :orderId";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("orderId", orderId);
 		List<OrderItem> orderItemList = template.query(sql, param, ORDER_ITEM_ROW_MAPPER);

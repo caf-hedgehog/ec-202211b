@@ -29,7 +29,6 @@ public class AddCartController {
 
 	@PostMapping("/cart-list")
 	public String addCart(AddCartForm form) {
-		System.out.println(form);
 		addCartService.AddOrder(form, 1/* ユーザーID */);
 		return "redirect:/show-cart";
 	}
