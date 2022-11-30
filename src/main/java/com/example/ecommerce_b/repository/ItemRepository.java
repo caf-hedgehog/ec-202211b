@@ -16,12 +16,7 @@ import com.example.ecommerce_b.domain.Item;
  * 
  * itemsテーブルを操作するレポジトリ.
  * 
- * @author 萩田
- * 
- *         itemsテーブルを操作するリポジトリ.
- * 
- * @author yamaokahayato
- *
+ * @author 萩田 yamaokahayato
  * 
  */
 @Repository
@@ -68,6 +63,23 @@ public class ItemRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%" + name + "%");
 		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
 		return itemList;
+	}
+
+	/**
+	 * 商品一覧の並び順を検索する.
+	 * 
+	 * @param order
+	 * @return 商品一覧
+	 */
+	public List<Item> findAll(String sort) {
+		String sql = "SELECT id, name, description, price_m, price_l, image_path, deleted FROM items ORDER BY price_m";
+
+		if (sort.equals("high")) {
+			sql = sql + " DESC";
+		}
+		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
+		return itemList;
+
 	}
 
 }
