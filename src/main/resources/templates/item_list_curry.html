@@ -93,11 +93,6 @@
                 th:action="@{/showItemList/showList}"
                 th:object="${showItemListForm}"
               >
-                <input
-                  type="hidden"
-                  th:value="${session.userId}"
-                  name="userId"
-                />
                 <div class="form-group">
                   <label for="code" class="control-label col-sm-2"
                     >商品名</label
