@@ -40,6 +40,6 @@ public class DeleteCartController {
 	public String deleteCart(Integer orderItemId) {
 		service.deleteCart(orderItemId);
 
-		return "redirect:/delete";
+		return "redirect:/show-cart";
 	}
 }
