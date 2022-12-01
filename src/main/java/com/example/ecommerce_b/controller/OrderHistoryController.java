@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.ecommerce_b.domain.Order;
 import com.example.ecommerce_b.service.OrderHistoryService;
 
+/**
+ * 注文履歴を表示.
+ * 
+ * @author 萩田
+ *
+ */
 @Controller
 @RequestMapping("/order-hisotry")
 public class OrderHistoryController {
@@ -23,10 +29,16 @@ public class OrderHistoryController {
 	@Autowired
 	private HttpSession session;
 
+	/**
+	 * 注文履歴表示.
+	 * 
+	 * @param model リクエストパラメータ
+	 * @return 注文履歴。 ログインしていない場合はログい画面に戻る
+	 */
 	@GetMapping("")
 	public String showOrder(Model model) {
 		if (session.getAttribute("userId") != null) {
-			List<Order> orders = orderHistoryService.showOrderHistory((Integer) session.getAttribute("userId"), 2);// statusどうしよう。。。
+			List<Order> orders = orderHistoryService.showOrderHistory((Integer) session.getAttribute("userId"), 1);// statusどうしよう。。。
 			model.addAttribute("orders", orders);
 			return "order-history";
 		}
