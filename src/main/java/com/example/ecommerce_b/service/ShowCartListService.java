@@ -48,13 +48,12 @@ public class ShowCartListService {
 	public Order showCartList(Integer userId, Integer status) {
 		// ユーザーIDとステータスから注文前の情報を取得
 		Order order = orderRepository.findByStatusAndUserId(status, userId).get(0);
-		if (order == null) {
-			return null;
-		}
 
 		// 注文商品リストにオーダーIDと一致する商品を取得
 		List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());
-
+//		if (orderItemList.isEmpty()) {
+//			return order = null;
+//		}
 		List<Item> itemList = new ArrayList<>();
 
 		for (int i = 0; i < orderItemList.size(); i++) {
