@@ -53,7 +53,7 @@ public class LoginLogoutController {
 			model.addAttribute("loginError", "メールアドレス、またはパスワードが間違っています");
 			return "login";
 		}
-		session.setAttribute("session", user);
+		session.setAttribute("userId", user.getId());
 		return "redirect:/showItemList/show";
 	}
 

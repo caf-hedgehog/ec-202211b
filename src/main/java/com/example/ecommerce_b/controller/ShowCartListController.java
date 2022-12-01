@@ -22,9 +22,8 @@ public class ShowCartListController {
 	private ShowCartListService showCartListService;
 
 	@GetMapping("")
-	public String index(Model model) {
-		System.out.println("-------->" + showCartListService.showCartList(1, 0));
-		model.addAttribute("cartList", showCartListService.showCartList(1, 0));
+	public String index(Model model, Integer userId) {
+		model.addAttribute("cartList", showCartListService.showCartList(userId, 0));
 		return "cart_list";
 	}
 
