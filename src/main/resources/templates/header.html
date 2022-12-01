@@ -29,7 +29,11 @@
               <span class="icon-bar"></span> <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="item_list_pizza.html">
+            <a
+              class="navbar-brand"
+              href="item_list_pizza.html"
+              th:href="@{/showList}"
+            >
               <!-- 企業ロゴ -->
               <img
                 alt="main log"
@@ -46,8 +50,7 @@
             id="bs-example-navbar-collapse-1"
           >
             <p class="navbar-text navbar-right">
-              <a class="navbar-link" th:href="@{/showItemList/showList}"
-                >商品一覧</a
+              <a class="navbar-link" th:href="@{/showList}">商品一覧</a
               >&nbsp;&nbsp;
               <a
                 href="cart_list.html"
@@ -64,7 +67,7 @@
               </a>
               &nbsp;&nbsp;
               <span th:unless="${session.userId}">
-                <a href="login.html" th:href="@{/}" class="navbar-link"
+                <a href="login.html" th:href="@{/login}" class="navbar-link"
                   >ログイン</a
                 >&nbsp;&nbsp;
               </span>
@@ -72,7 +75,7 @@
                 <a
                   href="item_list_pizza.html"
                   class="navbar-link"
-                  th:href="@{/logout}"
+                  th:href="@{/login/logout}"
                   >ログアウト</a
                 >
               </span>

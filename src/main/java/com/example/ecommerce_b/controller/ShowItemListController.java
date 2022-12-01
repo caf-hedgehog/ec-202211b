@@ -19,13 +19,13 @@ import com.example.ecommerce_b.service.ShowItemListService;
  *
  */
 @Controller
-@RequestMapping("/showItemList")
+@RequestMapping("/")
 public class ShowItemListController {
 
 	@Autowired
 	private ShowItemListService showItemListService;
 
-	@GetMapping("/show")
+	@GetMapping("")
 	public String index(Model model) {
 		List<Item> itemList = showItemListService.searchByName(null);
 		model.addAttribute("itemList", itemList);
