@@ -60,6 +60,10 @@ public class ShowCartListService {
 					.findByOrderItemId(orderItemList.get(i).getId());
 
 			for (int j = 0; j < orderToppingList.size(); j++) {
+				if (orderToppingList.get(j).getToppingId() == 0) {
+					orderToppingList.get(j).setTopping(null);
+					break;
+				}
 				orderToppingList.get(j).setTopping(toppinRepository.load(orderToppingList.get(j).getToppingId()));
 			}
 			orderItemList.get(i).setOrderToppingList(orderToppingList);

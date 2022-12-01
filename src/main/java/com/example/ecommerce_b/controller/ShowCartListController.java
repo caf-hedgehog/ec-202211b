@@ -1,5 +1,7 @@
 package com.example.ecommerce_b.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,12 @@ public class ShowCartListController {
 	@Autowired
 	private ShowCartListService showCartListService;
 
+	@Autowired
+	private HttpSession session;
+
 	@GetMapping("")
 	public String index(Model model, Integer userId) {
+		userId = (Integer) session.getAttribute("userId");
 		model.addAttribute("cartList", showCartListService.showCartList(userId, 0));
 		return "cart_list";
 	}
