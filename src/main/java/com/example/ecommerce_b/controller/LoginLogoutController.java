@@ -20,7 +20,7 @@ import com.example.ecommerce_b.service.LoginLogoutService;
  *
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginLogoutController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class LoginLogoutController {
 	 * @param form リクエストパラメータ
 	 * @return ログイン画面
 	 */
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String index(LoginForm form) {
 		return "login";
 	}
@@ -54,7 +54,7 @@ public class LoginLogoutController {
 			return "login";
 		}
 		session.setAttribute("userId", user.getId());
-		return "redirect:/showItemList/show";
+		return "redirect:/";
 	}
 
 	/**

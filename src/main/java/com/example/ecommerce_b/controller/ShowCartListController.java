@@ -27,10 +27,13 @@ public class ShowCartListController {
 	private HttpSession session;
 
 	@GetMapping("")
-	public String index(Model model, Integer userId) {
-		userId = (Integer) session.getAttribute("userId");
-		model.addAttribute("cartList", showCartListService.showCartList(userId, 0));
-		return "cart_list";
+	public String index(Model model) {
+		if (session.getAttribute("userId") != null) {
+			Integer userId = (Integer) session.getAttribute("userId");
+			model.addAttribute("cartList", showCartListService.showCartList(userId, 0));
+			return "cart_list";
+		}
+		return "redirect:/login";
 	}
 
 }
