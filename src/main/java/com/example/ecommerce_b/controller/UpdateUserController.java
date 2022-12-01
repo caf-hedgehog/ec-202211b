@@ -52,10 +52,50 @@ public class UpdateUserController {
 	public String update(UserForm form, Model model) {
 		User user = new User();
 		BeanUtils.copyProperties(form, user);
-		updateUserService.update(user);
-		model.addAttribute("complete", "変更が完了しました。");
-		model.addAttribute("user", updateUserService.load((Integer) session.getAttribute("userId")));
-		return "redirect:/user-page";
+		if (updateUserService.update(user)) {
+			model.addAttribute("user", updateUserService.load((Integer) session.getAttribute("userId")));
+			return "redirect:/complete";
+		}
+		model.addAttribute("updateError", "パスワードが違います");
+		return userPage(model);
+	}
+
+	/**
+	 * @return パスワード変更ページ
+	 */
+	@GetMapping("/update-password")
+	public String updatePass(Model model) {
+		return "update_password";
+	}
+
+	/**
+	 * パスワード変更処理.
+	 * 
+	 * @param password    現在のパスワード
+	 * @param newPassword 新しいパスワード
+	 * @param confirm     確認用パスワード
+	 * @param model       リクエストパラメータ
+	 * @return 完了画面
+	 */
+	@PostMapping("/pass")
+	public String pass(String password, String newPassword, String confirm, Model model) {
+		if (!newPassword.equals(confirm)) {
+			model.addAttribute("updateError", "パスワードが違います");
+			return updatePass(model);
+		}
+		updateUserService.updatePassword(password, newPassword);
+		return "redirect:/complete";
+
+	}
+
+	/**
+	 * 完了ページ遷移.
+	 * 
+	 * @return 完了ページ
+	 */
+	@GetMapping("/complete")
+	public String done() {
+		return "update_finished";
 	}
 
 }

@@ -15,116 +15,133 @@
   <body>
     <div class="container">
       <div th:insert="/header :: frag_header"></div>
-      <h3 class="text-center">ショッピングカート</h3>
-      <table class="table table-striped item-list-table">
-        <tbody>
-          <tr>
-            <td>
-              <div class="text-center">ユーザー名</div>
-            </td>
-            <td>
-              <input
-                type="text"
-                th:value="${user.name}"
-                size="40"
-                disabled
-                id="userName"
-              />
-              <button type="submit" class="btn btn-primary" id="btn_name">
-                編集
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="text-center">メールアドレス</div>
-            </td>
-            <td>
-              <input
-                type="text"
-                th:value="${user.email}"
-                size="40"
-                id="email"
-                disabled
-              />
-              <button type="submit" class="btn btn-primary" id="btn_email">
-                編集
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="text-center">郵便番号</div>
-            </td>
-            <td>
-              <input
-                type="text"
-                th:value="${user.zipcode}"
-                size="40"
-                id="inputZipcode"
-                disabled
-              />
-              <button type="submit" class="btn btn-primary" id="btn_zipcode1">
-                編集
-              </button>
-              <input type="button" id="btn_zipCode" value="住所検索" disabled />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="text-center">住所</div>
-            </td>
-            <td>
-              <input
-                type="text"
-                th:value="${user.address}"
-                size="40"
-                id="inputAddress"
-                disabled
-              />
-              <button type="submit" class="btn btn-primary" id="btn_address">
-                編集
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="text-center">電話番号</div>
-            </td>
-            <td>
-              <input
-                type="text"
-                th:value="${user.telephone}"
-                size="40"
-                id="telephone"
-                disabled
-              />
-              <button type="submit" class="btn btn-primary" id="btn_telephone">
-                編集
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <div class="text-center">パスワード</div>
-            </td>
-            <td>
-              <input
-                type="password"
-                th:value="${user.password}"
-                size="40"
-                id="password"
-                disabled
-              />
-              <button type="submit" class="btn btn-primary" id="btn_password">
-                編集
-              </button>
-            </td>
-          </tr>
-          <span th:text="${user}"></span>
-        </tbody>
-      </table>
-      <button type="submit" class="btn btn-primary">更新</button>
+      <h3 class="text-center">ユーザー情報</h3>
+      <form th:action="@{/update-user}" method="post">
+        <table class="table table-striped item-list-table">
+          <tbody>
+            <tr>
+              <td>
+                <div class="text-center">ユーザー名</div>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  th:value="${user.name}"
+                  size="40"
+                  disabled
+                  id="userName"
+                  name="name"
+                />
+                <button type="button" class="btn btn-primary" id="btn_name">
+                  編集
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="text-center">メールアドレス</div>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  th:value="${user.email}"
+                  size="40"
+                  id="email"
+                  name="email"
+                  disabled
+                />
+                <button type="button" class="btn btn-primary" id="btn_email">
+                  編集
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="text-center">郵便番号</div>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  th:value="${user.zipcode}"
+                  size="40"
+                  id="inputZipcode"
+                  name="zipcode"
+                  disabled
+                />
+                <button type="button" class="btn btn-primary" id="btn_zipcode1">
+                  編集
+                </button>
+                <input
+                  type="button"
+                  id="btn_zipCode"
+                  value="住所検索"
+                  disabled
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="text-center">住所</div>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  th:value="${user.address}"
+                  size="40"
+                  id="inputAddress"
+                  name="address"
+                  disabled
+                />
+                <button type="button" class="btn btn-primary" id="btn_address">
+                  編集
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="text-center">電話番号</div>
+              </td>
+              <td>
+                <input
+                  type="text"
+                  th:value="${user.telephone}"
+                  size="40"
+                  id="telephone"
+                  name="telephone"
+                  disabled
+                />
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="btn_telephone"
+                >
+                  編集
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="text-center">パスワード</div>
+              </td>
+              <td>
+                <span th:text="${updateError}" style="color: red"></span><br />
+                <input
+                  type="password"
+                  size="40"
+                  id="password"
+                  name="password"
+                />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a th:href="@{/update-password}">パスワード変更はこちら</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="text-align: center">
+          <button type="submit" class="btn btn-primary" style="width: 50%">
+            更新
+          </button>
+        </div>
+      </form>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
