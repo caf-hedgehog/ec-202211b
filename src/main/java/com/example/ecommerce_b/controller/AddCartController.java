@@ -23,9 +23,6 @@ public class AddCartController {
 	@Autowired
 	private AddCartService addCartService;
 
-	@Autowired
-	private ShowCartListController showCartListController;
-
 	@GetMapping("")
 	public String index() {
 		return "item_detail";
@@ -33,9 +30,8 @@ public class AddCartController {
 
 	@PostMapping("/cart-add")
 	public String addCart(AddCartForm form, Integer userId, Model model) {
-		System.out.println(userId);
 		addCartService.AddOrder(form, userId);
-		return showCartListController.index(model, userId);
+		return "redirect:/show-cart";
 	}
 
 }

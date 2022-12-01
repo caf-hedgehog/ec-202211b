@@ -41,6 +41,9 @@ public class OrderHistoryService {
 	public List<Order> showOrderHistory(Integer userId, Integer status) {
 		// ユーザーIDとステータスから注文前の情報を取得
 		List<Order> orders = orderRepository.findByStatusAndUserId(status, userId);
+		if (orders == null) {
+			return orders;
+		}
 		// 注文商品リストにオーダーIDと一致する商品を取得
 		List<OrderItem> orderItemList = new ArrayList<>();
 		for (int i = 0; i < orders.size(); i++) {
