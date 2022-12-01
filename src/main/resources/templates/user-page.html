@@ -23,42 +23,59 @@
               <div class="text-center">ユーザー名</div>
             </td>
             <td>
-              <input type="text" th:value="${user.name}" />
+              <input type="text" th:value="${user.name}" size="40" />
+              <button type="submit" class="btn btn-primary">編集</button>
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">メールアドレス</div>
-              <input type="text" th:value="${user.email}" />
             </td>
-          </tr>
-          <tr>
             <td>
-              <div class="text-center">パスワード</div>
-              <input type="text" th:value="${user.password}" />
+              <input type="text" th:value="${user.email}" size="40" />
+              <button type="submit" class="btn btn-primary">編集</button>
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">郵便番号</div>
-              <input type="text" th:value="${user.zipcode}" />
+            </td>
+            <td>
+              <input type="text" th:value="${user.zipcode}" size="40" />
+              <button type="submit" class="btn btn-primary">編集</button>
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">住所</div>
-              <input type="text" th:value="${user.address}" />
+            </td>
+            <td>
+              <input type="text" th:value="${user.address}" size="40" />
+              <button type="submit" class="btn btn-primary">編集</button>
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">電話番号</div>
-              <input type="text" th:value="${user.telephone}" />
+            </td>
+            <td>
+              <input type="text" th:value="${user.telephone}" size="40" />
+              <button type="submit" class="btn btn-primary">編集</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="text-center">パスワード</div>
+            </td>
+            <td>
+              <input type="text" th:value="${user.password}" size="40" />
+              <button type="submit" class="btn btn-primary">編集</button>
             </td>
           </tr>
           <span th:text="${user}"></span>
         </tbody>
       </table>
+      <button type="submit" class="btn btn-primary">更新</button>
     </div>
   </body>
 </html>
