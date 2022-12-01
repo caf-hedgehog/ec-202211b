@@ -1,5 +1,7 @@
 package com.example.ecommerce_b.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,9 @@ public class AddCartController {
 	@Autowired
 	private AddCartService addCartService;
 
+	@Autowired
+	private HttpSession session;
+
 	@GetMapping("")
 	public String index() {
 		return "item_detail";
@@ -30,6 +35,9 @@ public class AddCartController {
 
 	@PostMapping("/cart-add")
 	public String addCart(AddCartForm form, Integer userId, Model model) {
+		if (session.getAttribute("userId") == null) {
+			return "/login";
+		}
 		addCartService.AddOrder(form, userId);
 		return "redirect:/show-cart";
 	}
