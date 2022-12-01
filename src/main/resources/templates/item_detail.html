@@ -56,21 +56,37 @@
             id="bs-example-navbar-collapse-1"
           >
             <p class="navbar-text navbar-right">
+              <span th:text="${session.userName}"></span>
+              <a class="navbar-link" th:href="@{/showItemList/showList}"
+                >商品一覧</a
+              >&nbsp;&nbsp;
               <a
                 href="cart_list.html"
-                th:href="@{/show-cart}"
                 class="navbar-link"
+                th:href="@{/show-cart?userId=} + ${session.userId}"
                 >ショッピングカート</a
               >&nbsp;&nbsp;
-              <a href="order_history.html" class="navbar-link">注文履歴</a
-              >&nbsp;&nbsp;
-              <a href="login.html" class="navbar-link">ログイン</a>&nbsp;&nbsp;
               <a
-                href="item_list_pizza.html"
+                href="order_history.html"
+                th:href="@{/order-hisotry?userId=}+${session.userId}"
                 class="navbar-link"
-                th:href="@{/logout}"
-                >ログアウト</a
               >
+                注文履歴
+              </a>
+              &nbsp;&nbsp;
+              <span th:unless="${session.userId}">
+                <a href="login.html" th:href="@{/}" class="navbar-link"
+                  >ログイン</a
+                >&nbsp;&nbsp;
+              </span>
+              <span th:if="${session.userId}">
+                <a
+                  href="item_list_pizza.html"
+                  class="navbar-link"
+                  th:href="@{/logout}"
+                  >ログアウト</a
+                >
+              </span>
             </p>
           </div>
           <!-- /.navbar-collapse -->
