@@ -67,6 +67,14 @@
               </a>
               <a th:href="@{/user-page}"></a>
               &nbsp;&nbsp;
+              <span th:if="${session.userId}">
+                <a
+                  href="item_list_pizza.html"
+                  class="navbar-link"
+                  th:href="@{/user-page}"
+                  >ユーザー情報</a
+                > </span
+              >&nbsp;&nbsp;
               <span th:unless="${session.userId}">
                 <a href="login.html" th:href="@{/login}" class="navbar-link"
                   >ログイン</a

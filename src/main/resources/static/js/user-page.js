@@ -30,9 +30,4 @@ $(function () {
     const input = document.getElementById("telephone");
     input.disabled = false;
   });
-
-  $("#btn_password").on("click", function () {
-    const input = document.getElementById("password");
-    input.disabled = false;
-  });
 });
