@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja"
+xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -60,12 +62,13 @@
           class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
         >
           <div class="well">
-            <form method="post" th:action="@{/insert/register}">
+            <form method="post" th:action="@{/insert/register}" th:object="${insertUserForm}">
               <fieldset>
                 <legend>ユーザ登録</legend>
                 <div class="form-group">
                   <label for="inputName">名前:</label
                   ><label
+                  	th:errors="*{name}"
                     class="control-label"
                     style="color: red"
                     for="inputError"
@@ -77,11 +80,13 @@
                     id="inputName"
                     class="form-control"
                     placeholder="Name"
+                    th:field="*{name}"
                   />
                 </div>
                 <div class="form-group">
                   <label for="inputEmail">メールアドレス:</label
                   ><label
+                  	th:errors="*{email}"
                     class="control-label"
                     style="color: red"
                     for="inputError"
@@ -93,11 +98,13 @@
                     id="inputEmail"
                     class="form-control"
                     placeholder="Email"
+                    th:field="*{email}"
                   />
                 </div>
                 <div class="form-group">
                   <label for="inputZipcode">郵便番号:</label>
                   <label
+                  	th:errors="*{zipcode}"
                     class="control-label"
                     style="color: red"
                     for="inputError"
@@ -110,11 +117,13 @@
                     id="inputZipcode"
                     class="form-control"
                     placeholder="Zipcode"
+                    th:field="*{zipcode}"
                   />
                 </div>
                 <div class="form-group">
                   <label for="inputAddress">住所:</label>
                   <label
+                  	th:errors="*{address}"
                     class="control-label"
                     style="color: red"
                     for="inputError"
@@ -126,11 +135,13 @@
                     id="inputAddress"
                     class="form-control"
                     placeholder="Address"
+                    th:field="*{address}"
                   />
                 </div>
                 <div class="form-group">
                   <label for="inputTel">電話番号:</label>
                   <label
+                  	th:errors="*{telephone}"
                     class="control-label"
                     style="color: red"
                     for="inputError"
@@ -142,11 +153,13 @@
                     id="inputTel"
                     class="form-control"
                     placeholder="Tel"
+                    th:field="*{telephone}"
                   />
                 </div>
                 <div class="form-group">
                   <label for="inputPassword">パスワード:</label>
                   <label
+                  	th:errors="*{password}"
                     class="control-label"
                     style="color: red"
                     for="inputError"
@@ -158,6 +171,7 @@
                     id="inputPassword"
                     class="form-control"
                     placeholder="Password"
+                    th:feild="*{password}"
                   />
                 </div>
                 <div class="form-group">
@@ -165,6 +179,7 @@
                     >確認用パスワード:</label
                   >
                   <label
+                  	th:errors="*{confirm}"
                     class="control-label"
                     style="color: red"
                     for="inputError"
@@ -176,6 +191,7 @@
                     id="inputConfirmationPassword"
                     class="form-control"
                     placeholder="Confirmation Password"
+                    th:field="*{confirm}"
                   />
                 </div>
                 <div class="form-group">
