@@ -160,10 +160,10 @@
         <div
           class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
         >
-          <table class="table table-striped item-list-table">
+          <table class="table table-striped item-list-table" >
             <tbody>
-              <tr th:each="item : ${itemList}">
-                <th>
+              <tr th:each="itemList : ${itemListList}">
+                <th th:each="item : ${itemList}">
                   <a
                     th:href="@{/showItemDetail/showItemDetail?id=} + ${item.id}"
                   >
