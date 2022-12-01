@@ -36,14 +36,13 @@ public class ShowItemListController {
 	 * 商品一覧表示と検索欄からの曖昧検索.
 	 * 
 	 * @param itemName 商品名
-	 * @param model　モデル
+	 * @param model    モデル
 	 * @return 商品一覧画面
 	 */
 	@RequestMapping("/showList")
 	public String showList(String itemName, Model model) {
 		List<List<Item>> itemListList = showItemListService.searchByName(itemName);
 		model.addAttribute("itemListList", itemListList);
-		System.out.println("itemListList :" + itemListList);
 		return "item_list_curry";
 	}
 

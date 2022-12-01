@@ -21,10 +21,10 @@ import com.example.ecommerce_b.service.OrderConfirmationService;
 @Controller
 @RequestMapping("/order")
 public class OrderConfirmationController {
-	
+
 	@Autowired
 	OrderConfirmationService service;
-	
+
 	@Autowired
 	ShowOrderConfirmController controller;
 
@@ -38,22 +38,23 @@ public class OrderConfirmationController {
 	public String index(OrderConfirmationForm form) {
 		return "order_finished";
 	}
-	
+
 	/**
 	 * 注文するボタンを押した後注文内容を受け取りorderを更新、その後注文完了画面に遷移.
 	 * 
-	 * @param form 注文内容に関するform
+	 * @param form   注文内容に関するform
 	 * @param result BindingResult
-	 * @param model model
+	 * @param model  model
 	 * @return 注文完了画面(redirect)
 	 */
 	@PostMapping("/confirmation")
-	public String orderConfirmation(@Validated OrderConfirmationForm form, BindingResult result, Model model) {
-		if(result.hasErrors()) {
+	public String orderConfirmation(@Validated OrderConfirmationForm form, BindingResult result, Model model,
+			String responsibleCompany) {
+		if (result.hasErrors()) {
 			return controller.order(model, form);
 		}
 		service.updateOrder(form);
 		return "redirect:/order";
 	}
-	
+
 }
