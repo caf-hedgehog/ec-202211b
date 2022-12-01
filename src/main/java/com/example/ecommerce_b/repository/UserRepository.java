@@ -59,4 +59,36 @@ public class UserRepository {
 		template.update(sql, param);
 	}
 
+	/**
+	 * ユーザー情報の変更
+	 * 
+	 * @param user ユーザー情報
+	 */
+	public void update(User user) {
+		SqlParameterSource param = new BeanPropertySqlParameterSource(user);
+		String sql = "UPDATE users SET name=:name, email=:email, password=:password, zipcode=:zipcode, address=:address, telephone=:telephone WHERE id=:id";
+		template.update(sql, param);
+	}
+
+	/**
+	 * ユーザー情報検索.
+	 * 
+	 * @param id ユーザーID
+	 * @return ユーザー情報
+	 */
+	public User findById(Integer id) {
+		String sql = "SELECT id, name, email, password, zipcode, address, telephone FROM users WHERE id = :id";
+
+		MapSqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+
+		List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
+
+		// ユーザーが見つからなかった場合NULLを返す
+		if (userList.size() == 0) {
+			return null;
+		}
+
+		return userList.get(0);
+	}
+
 }
