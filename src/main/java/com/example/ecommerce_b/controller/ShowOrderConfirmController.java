@@ -38,7 +38,6 @@ public class ShowOrderConfirmController {
 	 */
 	@PostMapping("/order")
 	public String order(Model model, OrderConfirmationForm form) {
-		System.out.println("form内容" + form);
 		Order order = showOrderConfirmService.findByOrderId(form.getOrderId());
 		List<OrderItem> orderItemList = showOrderConfirmService.findOrderItemListByOrderId(form.getOrderId());
 		for (OrderItem orderItem : orderItemList) {

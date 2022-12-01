@@ -159,10 +159,12 @@
                     ></div>
                     <input
                       type="text"
+                      id="inputZipcode"
                       name="destinationZipcode"
                       th:field="*{destinationZipcode}"
                     />
-                    &nbsp;&nbsp;<button>住所検索</button>
+                    &nbsp;&nbsp;
+                    <input type="button" id="btn_zipCode" value="住所検索" />
                   </td>
                 </tr>
                 <tr>
@@ -175,6 +177,7 @@
                       style="color: red"
                     ></div>
                     <input
+                      id="inputAddress"
                       type="text"
                       name="destinationAddress"
                       th:field="*{destinationAddress}"
@@ -212,7 +215,7 @@
                         <div class="col-sm-5">
                           <input
                             type="date"
-                            name="name"
+                            name="deliveryTime"
                             id="name"
                             class="form-control input-sm"
                           />
@@ -229,35 +232,67 @@
                             10時
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="11"
+                            />
                             11時
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="12"
+                            />
                             12時 </label
                           ><br />
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="13"
+                            />
                             13時
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="14"
+                            />
                             14時
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="15"
+                            />
                             15時 </label
                           ><br />
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="16"
+                            />
                             16時
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="17"
+                            />
                             17時
                           </label>
                           <label class="radio-inline">
-                            <input type="radio" name="responsibleCompany" />
+                            <input
+                              type="radio"
+                              name="responsibleCompany"
+                              value="18"
+                            />
                             18時 </label
                           ><br />
                         </div>
@@ -332,6 +367,7 @@
     </div>
     <!-- end container -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/addressSearch.js}"></script>
   </body>
 </html>
