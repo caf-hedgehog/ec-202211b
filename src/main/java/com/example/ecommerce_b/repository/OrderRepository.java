@@ -77,4 +77,15 @@ public class OrderRepository {
 		return template.queryForObject(sql, param, ORDER_ROW_MAPPER);
 	}
 
+	/**
+	 * 注文を行う.
+	 * 
+	 * @return order order
+	 */
+	public void update(Order order) {
+		String sql = "UPDATE orders SET status = :status, order_date = :orderDate, destination_name = :destinationName, destination_email = :destinationEmail, destination_zipcode  = :destinationZipcode, destination_address  = :destinationAddress, destination_tel  = :destinationTel, delivery_time  = :deliveryTime, payment_method  = :paymentMethod WHERE id = :id;";
+		SqlParameterSource param = new BeanPropertySqlParameterSource(order);
+		template.update(sql, param);
+	}
+
 }
