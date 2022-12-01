@@ -4,3 +4,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/ec-202211b
     username: postgres
     password: postgres
+server:
+  servlet:
+    context-path: /ec-202211b

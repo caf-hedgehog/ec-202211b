@@ -2,6 +2,8 @@ package com.example.ecommerce_b.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +20,17 @@ public class OrderHistoryController {
 	@Autowired
 	private OrderHistoryService orderHistoryService;
 
+	@Autowired
+	private HttpSession session;
+
 	@GetMapping("")
-	public String showOrder(Model model, Integer userId) {
-		List<Order> orders = orderHistoryService.showOrderHistory(userId, 2);// statusどうしよう。。。
-		model.addAttribute("orders", orders);
-		return "order-history";
+	public String showOrder(Model model) {
+		if (session.getAttribute("userId") != null) {
+			List<Order> orders = orderHistoryService.showOrderHistory((Integer) session.getAttribute("userId"), 2);// statusどうしよう。。。
+			model.addAttribute("orders", orders);
+			return "order-history";
+		}
+		return "/login";
 	}
 
 }
