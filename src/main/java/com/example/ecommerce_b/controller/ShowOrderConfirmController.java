@@ -13,6 +13,7 @@ import com.example.ecommerce_b.domain.Order;
 import com.example.ecommerce_b.domain.OrderItem;
 import com.example.ecommerce_b.domain.OrderTopping;
 import com.example.ecommerce_b.domain.Topping;
+import com.example.ecommerce_b.form.OrderConfirmationForm;
 import com.example.ecommerce_b.service.ShowOrderConfirmService;
 
 /**
@@ -36,12 +37,10 @@ public class ShowOrderConfirmController {
 	 * @return 注文確認画面
 	 */
 	@PostMapping("/order")
-	public String order(Integer orderId, Model model) {
-		System.out.println("orderId" + orderId);
-
-		Order order = showOrderConfirmService.findByOrderId(orderId);
-		List<OrderItem> orderItemList = showOrderConfirmService.findOrderItemListByOrderId(orderId);
-
+	public String order(Model model, OrderConfirmationForm form) {
+		System.out.println("form内容" + form);
+		Order order = showOrderConfirmService.findByOrderId(form.getOrderId());
+		List<OrderItem> orderItemList = showOrderConfirmService.findOrderItemListByOrderId(form.getOrderId());
 		for (OrderItem orderItem : orderItemList) {
 			Item item = showOrderConfirmService.findItemByItemId(orderItem.getItemId());
 			orderItem.setItem(item);

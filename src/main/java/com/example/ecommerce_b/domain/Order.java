@@ -24,7 +24,7 @@ public class Order {
 	/** 宛先住所 */
 	private String destinationAddress;
 	/** 宛先TEL */
-	private Integer destinationTel;
+	private String destinationTel;
 	/** 配達時間 */
 	private Timestamp deliveryTime;
 	/** 支払い方法 */
@@ -116,11 +116,11 @@ public class Order {
 		this.destinationAddress = destinationAddress;
 	}
 
-	public Integer getDestinationTel() {
+	public String getDestinationTel() {
 		return destinationTel;
 	}
 
-	public void setDestinationTel(Integer destinationTel) {
+	public void setDestinationTel(String destinationTel) {
 		this.destinationTel = destinationTel;
 	}
 
