@@ -27,36 +27,37 @@ public class ShowItemListController {
 
 	@GetMapping("")
 	public String index(Model model) {
-		List<Item> itemList = showItemListService.searchByName(null);
-		model.addAttribute("itemList", itemList);
+		List<List<Item>> itemListList = showItemListService.searchByName(null);
+		model.addAttribute("itemListList", itemListList);
 		return "item_list_curry";
 	}
 
 	/**
-	 * 検索欄からの曖昧検索.
+	 * 商品一覧表示と検索欄からの曖昧検索.
 	 * 
-	 * @param form
-	 * @param model
+	 * @param itemName 商品名
+	 * @param model　モデル
 	 * @return 商品一覧画面
 	 */
 	@RequestMapping("/showList")
 	public String showList(String itemName, Model model) {
-		List<Item> itemList = showItemListService.searchByName(itemName);
-		model.addAttribute("itemList", itemList);
+		List<List<Item>> itemListList = showItemListService.searchByName(itemName);
+		model.addAttribute("itemListList", itemListList);
+		System.out.println("itemListList :" + itemListList);
 		return "item_list_curry";
 	}
 
 	/**
 	 * 商品の並び替え欄から送られた内容で商品の並び替えを表示する
 	 * 
-	 * @param order
+	 * @param sort
 	 * @param model モデル
 	 * @return 商品一覧画面
 	 */
 	@PostMapping("/itemSort")
 	public String itemSort(String sort, Model model) {
-		List<Item> itemList = showItemListService.itemSort(sort);
-		model.addAttribute("itemList", itemList);
+		List<List<Item>> itemListList = showItemListService.itemSort(sort);
+		model.addAttribute("itemListList", itemListList);
 		return "item_list_curry";
 	}
 
