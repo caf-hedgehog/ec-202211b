@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ecommerce_b.domain.User;
 import com.example.ecommerce_b.form.UserForm;
+import com.example.ecommerce_b.service.MailSenderService;
 import com.example.ecommerce_b.service.UpdateUserService;
 
 /**
@@ -29,6 +30,9 @@ public class UpdateUserController {
 
 	@Autowired
 	private HttpSession session;
+
+	@Autowired
+	private MailSenderService mailSenderService;
 
 	/**
 	 * ユーザー情報変更ページ遷移.
@@ -61,10 +65,27 @@ public class UpdateUserController {
 	}
 
 	/**
+	 * パスワード変更メール送信画面.
+	 * 
 	 * @return パスワード変更ページ
 	 */
 	@GetMapping("/update-password")
 	public String updatePass(Model model) {
+		mailSenderService.send();
+		return "update_finished";
+	}
+
+	/**
+	 * パスワード変更画面前処理.
+	 * 
+	 * @param token トークン
+	 * @return パスワード変更画面
+	 */
+	@GetMapping("/insertPage")
+	public String insertPage(String token) {
+		User user = updateUserService.findByHash(token);
+		session.setAttribute("userId", user.getId());
+		session.setAttribute("userName", user.getName());
 		return "update_password";
 	}
 
@@ -95,6 +116,7 @@ public class UpdateUserController {
 	 */
 	@GetMapping("/complete")
 	public String done() {
+		mailSenderService.send();
 		return "update_finished";
 	}
 

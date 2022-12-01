@@ -91,4 +91,25 @@ public class UserRepository {
 		return userList.get(0);
 	}
 
+	/**
+	 * パスワード検索.
+	 * 
+	 * @param hash ハッシュ化されたパスワード
+	 * @return ユーザー情報
+	 */
+	public User findByHash(String hash) {
+		String sql = "SELECT id, name, email, password, zipcode, address, telephone FROM users WHERE password = :password";
+
+		MapSqlParameterSource param = new MapSqlParameterSource().addValue("password", hash);
+
+		List<User> userList = template.query(sql, param, USER_ROW_MAPPER);
+
+		// ユーザーが見つからなかった場合NULLを返す
+		if (userList.size() == 0) {
+			return null;
+		}
+
+		return userList.get(0);
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.example.ecommerce_b.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +48,14 @@ public class LoginLogoutController {
 	 * @return 商品一覧ページ
 	 */
 	@PostMapping("/showItemList")
-	public String login(LoginForm form, Model model) {
+	public String login(LoginForm form, Model model, HttpServletResponse response) {
 		User user = service.login(form.getEmail(), form.getPassword());
 		if (user == null) {
 			model.addAttribute("loginError", "メールアドレス、またはパスワードが間違っています");
 			return "login";
 		}
 		session.setAttribute("userId", user.getId());
+		session.setAttribute("userName", user.getName());
 		return "redirect:/";
 	}
 

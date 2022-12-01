@@ -69,13 +69,11 @@ public class UpdateUserService {
 	 */
 	public boolean updatePassword(String password, String newPassword) {
 		User user = load((Integer) session.getAttribute("userId"));
-		System.out.println(user);
 		if (passwordCheck(password, user.getPassword())) {
 			BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 			String hashedPassword = bcpe.encode(newPassword);
 			user.setPassword(hashedPassword);
 			repository.update(user);
-			System.out.println("ok");
 			return true;
 		}
 		return false;
@@ -105,6 +103,17 @@ public class UpdateUserService {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * ユーザ検索.
+	 * 
+	 * @param hash ハッシュ化されたパスワード
+	 * @return ユーザー情報
+	 */
+	public User findByHash(String hash) {
+		User user = repository.findByHash(hash);
+		return user;
 	}
 
 }
