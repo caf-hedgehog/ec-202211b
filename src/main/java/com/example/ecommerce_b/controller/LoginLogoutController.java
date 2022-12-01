@@ -20,7 +20,7 @@ import com.example.ecommerce_b.service.LoginLogoutService;
  *
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginLogoutController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class LoginLogoutController {
 	 * @param form リクエストパラメータ
 	 * @return ログイン画面
 	 */
-	@RequestMapping("/")
+	@RequestMapping("")
 	public String index(LoginForm form) {
 		return "login";
 	}
@@ -53,8 +53,8 @@ public class LoginLogoutController {
 			model.addAttribute("loginError", "メールアドレス、またはパスワードが間違っています");
 			return "login";
 		}
-		session.setAttribute("session", user);
-		return "forward:/showItemList/showList";
+		session.setAttribute("userId", user.getId());
+		return "redirect:/";
 	}
 
 	/**

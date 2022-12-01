@@ -1,5 +1,7 @@
 package com.example.ecommerce_b.form;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * ユーザー情報フォーム.
  * 
@@ -8,18 +10,25 @@ package com.example.ecommerce_b.form;
  */
 public class InsertUserForm {
 	/** ユーザー名 */
+	@NotBlank(message="名前を入力してください")
 	private String name;
 	/** メールアドレス */
+	@NotBlank(message="メールアドレスを入力してください")
 	private String email;
 	/** パスワード */
+	@NotBlank(message="パスワードを入力してください")
 	private String password;
 	/** 確認用パスワード */
+	@NotBlank(message="確認用パスワードを入力してください")
 	private String confirm;
 	/** 郵便番号 */
+	@NotBlank(message="郵便番号を入力してください")
 	private String zipcode;
 	/** 住所 */
+	@NotBlank(message="住所を入力してください")
 	private String address;
 	/** 電話番号 */
+	@NotBlank(message="電話番号を入力してください")
 	private String telephone;
 
 	public String getName() {

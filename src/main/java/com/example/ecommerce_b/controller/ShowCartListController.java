@@ -1,5 +1,7 @@
 package com.example.ecommerce_b.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,11 +23,17 @@ public class ShowCartListController {
 	@Autowired
 	private ShowCartListService showCartListService;
 
+	@Autowired
+	private HttpSession session;
+
 	@GetMapping("")
 	public String index(Model model) {
-		System.out.println("-------->" + showCartListService.showCartList(1, 0));
-		model.addAttribute("cartList", showCartListService.showCartList(1, 0));
-		return "cart_list";
+		if (session.getAttribute("userId") != null) {
+			Integer userId = (Integer) session.getAttribute("userId");
+			model.addAttribute("cartList", showCartListService.showCartList(userId, 0));
+			return "cart_list";
+		}
+		return "redirect:/login";
 	}
 
 }

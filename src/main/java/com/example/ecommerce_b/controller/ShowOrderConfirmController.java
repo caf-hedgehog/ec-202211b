@@ -25,15 +25,15 @@ import com.example.ecommerce_b.service.ShowOrderConfirmService;
 @Controller
 @RequestMapping("/order-confirm")
 public class ShowOrderConfirmController {
-	
+
 	@Autowired
 	ShowOrderConfirmService showOrderConfirmService;
-	
+
 	/**
 	 * 注文確認画面に遷移.
 	 * 
 	 * @param orderId orderのid
-	 * @param model model
+	 * @param model   model
 	 * @return 注文確認画面
 	 */
 	@PostMapping("/order")
@@ -41,24 +41,23 @@ public class ShowOrderConfirmController {
 		System.out.println("form内容" + form);
 		Order order = showOrderConfirmService.findByOrderId(form.getOrderId());
 		List<OrderItem> orderItemList = showOrderConfirmService.findOrderItemListByOrderId(form.getOrderId());
-		
 		for (OrderItem orderItem : orderItemList) {
 			Item item = showOrderConfirmService.findItemByItemId(orderItem.getItemId());
 			orderItem.setItem(item);
-			
-			List<OrderTopping> orderToppingList = showOrderConfirmService.findOrderToppingListByOrderItemId(orderItem.getId());
-			
+
+			List<OrderTopping> orderToppingList = showOrderConfirmService
+					.findOrderToppingListByOrderItemId(orderItem.getId());
+
 			for (OrderTopping orderTopping : orderToppingList) {
 				Topping topping = showOrderConfirmService.findToppingByToppingId(orderTopping.getToppingId());
 				orderTopping.setTopping(topping);
 			}
 			orderItem.setOrderToppingList(orderToppingList);
 		}
-		
+
 		order.setOrderItemList(orderItemList);
 		model.addAttribute("order", order);
-		
-		
+
 		return "order_confirm";
 	}
 }
