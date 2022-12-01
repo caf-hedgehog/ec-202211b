@@ -31,7 +31,7 @@ public class AddCartController {
 	@PostMapping("/cart-add")
 	public String addCart(AddCartForm form, Integer userId, Model model) {
 		addCartService.AddOrder(form, userId);
-		return "forward:/show-cart/cart";
+		return "redirect:/show-cart";
 	}
 
 }

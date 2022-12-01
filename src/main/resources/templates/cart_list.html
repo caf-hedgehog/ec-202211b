@@ -85,111 +85,107 @@
       </nav>
 
       <!-- table -->
-      <form th:action="@{/order-confirm/order}" method="POST">
-        <div class="row">
-          <div
-            class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
-          >
-            <h3 class="text-center">ショッピングカート</h3>
-            <table class="table table-striped item-list-table">
-              <tbody>
-                <tr>
-                  <th>
-                    <div class="text-center">商品名</div>
-                  </th>
-                  <th>
-                    <div class="text-center">サイズ、価格(税抜)、数量</div>
-                  </th>
-                  <th>
-                    <div class="text-center">トッピング、価格(税抜)</div>
-                  </th>
-                  <th>
-                    <div class="text-center">小計</div>
-                  </th>
-                  <th></th>
-                </tr>
-                <tr th:each="cartDetail, stat : ${cartList.orderItemList}">
-                  <input
-                    type="hidden"
-                    name="orderId"
-                    th:value="${cartDetail.orderId}"
-                  />
-                  <td>
-                    <div class="center">
-                      <img
-                        src="../static/img_pizza/1.jpg"
-                        class="img-responsive img6-rounded item-img-center"
-                        th:src="@{/img_curry/} + ${cartDetail.item.imagePath}"
-                        width="100"
-                        height="300"
-                      /><br />
-                      <span th:text="${cartDetail.item.name}"></span>
-                    </div>
-                  </td>
 
-                  <td>
-                    <span class="price" th:text="${cartDetail.size}">
-                      &nbsp;Ｌ</span
-                    >
-                    &nbsp;&nbsp;
-                    <span th:if="${cartDetail.size} == 'M'">
-                      <span th:text="${cartDetail.item.priceM}"></span>円
-                    </span>
-                    <span th:if="${cartDetail.size} == 'L'">
-                      <span th:text="${cartDetail.item.priceL}"></span>円
-                    </span>
-                    &nbsp;&nbsp;
-                    <span th:text="${cartDetail.quantity}"></span>個
-                  </td>
-                  <td>
-                    <ul>
-                      <li
-                        th:each="toppingList : ${cartDetail.orderToppingList}"
+      <div class="row">
+        <div
+          class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
+        >
+          <h3 class="text-center">ショッピングカート</h3>
+          <table class="table table-striped item-list-table">
+            <tbody>
+              <tr>
+                <th>
+                  <div class="text-center">商品名</div>
+                </th>
+                <th>
+                  <div class="text-center">サイズ、価格(税抜)、数量</div>
+                </th>
+                <th>
+                  <div class="text-center">トッピング、価格(税抜)</div>
+                </th>
+                <th>
+                  <div class="text-center">小計</div>
+                </th>
+                <th></th>
+              </tr>
+              <tr th:each="cartDetail, stat : ${cartList.orderItemList}">
+                <input
+                  type="hidden"
+                  name="orderId"
+                  th:value="${cartDetail.orderId}"
+                />
+                <td>
+                  <div class="center">
+                    <img
+                      src="../static/img_pizza/1.jpg"
+                      class="img-responsive img6-rounded item-img-center"
+                      th:src="@{/img_curry/} + ${cartDetail.item.imagePath}"
+                      width="100"
+                      height="300"
+                    /><br />
+                    <span th:text="${cartDetail.item.name}"></span>
+                  </div>
+                </td>
+
+                <td>
+                  <span class="price" th:text="${cartDetail.size}">
+                    &nbsp;Ｌ</span
+                  >
+                  &nbsp;&nbsp;
+                  <span th:if="${cartDetail.size} == 'M'">
+                    <span th:text="${cartDetail.item.priceM}"></span>円
+                  </span>
+                  <span th:if="${cartDetail.size} == 'L'">
+                    <span th:text="${cartDetail.item.priceL}"></span>円
+                  </span>
+                  &nbsp;&nbsp;
+                  <span th:text="${cartDetail.quantity}"></span>個
+                </td>
+                <td>
+                  <ul>
+                    <li th:each="toppingList : ${cartDetail.orderToppingList}">
+                      <span th:text="${toppingList.topping.name}"></span>
+                      <span th:if="${cartDetail.size} == 'M'">
+                        <span th:text="${toppingList.topping.priceM}"></span>円
+                      </span>
+                      <span th:if="${cartDetail.size} == 'L'">
+                        <span th:text="${toppingList.topping.priceL}"></span>円
+                      </span>
+                    </li>
+                  </ul>
+                </td>
+                <td>
+                  <div class="text-center">3,280円</div>
+                </td>
+                <td>
+                  <div class="text-center">
+                    <form th:action="@{/delete/cart}" method="post">
+                      <button
+                        type="submit"
+                        class="btn btn-primary"
+                        name="orderItemId"
+                        th:value="${cartDetail.id}"
                       >
-                        <span th:text="${toppingList.topping.name}"></span>
-                        <span th:if="${cartDetail.size} == 'M'">
-                          <span th:text="${toppingList.topping.priceM}"></span
-                          >円
-                        </span>
-                        <span th:if="${cartDetail.size} == 'L'">
-                          <span th:text="${toppingList.topping.priceL}"></span
-                          >円
-                        </span>
-                      </li>
-                    </ul>
-                  </td>
-                  <td>
-                    <div class="text-center">3,280円</div>
-                  </td>
-                  <td>
-                    <div class="text-center">
-                      <form th:action="@{/delete/cart}" method="post">
-                        <button
-                          type="submit"
-                          class="btn btn-primary"
-                          name="orderItemId"
-                          th:value="${cartDetail.id}"
-                        >
-                          削除
-                        </button>
-                      </form>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                        削除
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-offset-2 col-xs-8">
+          <div class="form-group text-center">
+            <span id="total-price">消費税：8,000円</span><br />
+            <span id="total-price">ご注文金額合計：38,000円 (税込)</span>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-xs-offset-2 col-xs-8">
-            <div class="form-group text-center">
-              <span id="total-price">消費税：8,000円</span><br />
-              <span id="total-price">ご注文金額合計：38,000円 (税込)</span>
-            </div>
-          </div>
-        </div>
-
+      </div>
+      <form th:action="@{/order-confirm/order}" method="POST">
         <div class="row">
           <div class="col-xs-offset-5 col-xs-3">
             <div class="form-group">
