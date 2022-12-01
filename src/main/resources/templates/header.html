@@ -65,6 +65,7 @@
               >
                 注文履歴
               </a>
+              <a th:href="@{/user-page}"></a>
               &nbsp;&nbsp;
               <span th:unless="${session.userId}">
                 <a href="login.html" th:href="@{/login}" class="navbar-link"

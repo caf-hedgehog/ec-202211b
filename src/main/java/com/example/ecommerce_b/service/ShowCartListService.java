@@ -51,7 +51,9 @@ public class ShowCartListService {
 
 		// 注文商品リストにオーダーIDと一致する商品を取得
 		List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());
-
+//		if (orderItemList.isEmpty()) {
+//			return order = null;
+//		}
 		List<Item> itemList = new ArrayList<>();
 
 		for (int i = 0; i < orderItemList.size(); i++) {

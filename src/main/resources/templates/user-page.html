@@ -29,26 +29,31 @@
           <tr>
             <td>
               <div class="text-center">メールアドレス</div>
+              <input type="text" th:value="${user.email}" />
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">パスワード</div>
+              <input type="text" th:value="${user.password}" />
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">郵便番号</div>
+              <input type="text" th:value="${user.zipcode}" />
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">住所</div>
+              <input type="text" th:value="${user.address}" />
             </td>
           </tr>
           <tr>
             <td>
               <div class="text-center">電話番号</div>
+              <input type="text" th:value="${user.telephone}" />
             </td>
           </tr>
           <span th:text="${user}"></span>
