@@ -45,16 +45,15 @@ public class InsertUserController {
 	 * @return ログイン画面
 	 */
 	@PostMapping("/register")
-	public String insert(@Validated InsertUserForm form, BindingResult result, RedirectAttributes redirectAttributes, Model model) {
+	public String insert(@Validated InsertUserForm form, BindingResult result, RedirectAttributes redirectAttributes,
+			Model model) {
 		if (result.hasErrors()) {
 			return index(model, form);
 		}
-		System.out.println(form);
 		User user = new User();
 		BeanUtils.copyProperties(form, user);
-		System.out.println(user);
 		service.insert(user);
 		return "redirect:/";
 	}
-	
+
 }

@@ -64,10 +64,16 @@
                   >
                   &nbsp;&nbsp;
                   <span th:if="${cartDetail.size} == 'M'">
-                    <span th:text="${cartDetail.item.priceM}"></span>円
+                    <span
+                      th:text="${#numbers.formatInteger(cartDetail.item.priceM, 0, 'COMMA')}"
+                    ></span
+                    >円
                   </span>
                   <span th:if="${cartDetail.size} == 'L'">
-                    <span th:text="${cartDetail.item.priceL}"></span>円
+                    <span
+                      th:text="${#numbers.formatInteger(cartDetail.item.priceL, 0, 'COMMA')}"
+                    ></span
+                    >円
                   </span>
                   &nbsp;&nbsp;
                   <span th:text="${cartDetail.quantity}"></span>個
@@ -75,7 +81,8 @@
                 <td>
                   <ul>
                     <li th:each="toppingList : ${cartDetail.orderToppingList}">
-                      <span th:text="${toppingList.topping.name}"></span>
+                      <span th:text="${toppingList.topping.name}"></span
+                      >&nbsp;&nbsp;
                       <span th:if="${cartDetail.size} == 'M'">
                         <span th:text="${toppingList.topping.priceM}"></span>円
                       </span>
