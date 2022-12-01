@@ -58,17 +58,13 @@ public class AddCartService {
 		orderItemRepository.insert(orderItem);
 
 		OrderTopping orderTopping = new OrderTopping();
-		if (form.getToppingIdList() == null) {
-			orderTopping.setToppingId(0);
-			orderTopping.setOrderItemId(orderItem.getId());
-			orderToppingRepository.insert(orderTopping);
-		} else {
+		if (form.getToppingIdList() != null) {
 			for (int i = 0; i < form.getToppingIdList().size(); i++) {
 				orderTopping = new OrderTopping(null, form.getToppingIdList().get(i), orderItem.getId(),
 						toppingRepository.load(form.getToppingIdList().get(i)));
 				orderToppingRepository.insert(orderTopping);// 回す
 			}
-		}
+		} 
 	}
 
 }
