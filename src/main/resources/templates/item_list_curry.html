@@ -48,6 +48,7 @@
             </a>
           </div>
 
+
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div
             class="collapse navbar-collapse"
@@ -104,8 +105,12 @@
                       id="code"
                       class="form-control input-sm"
                       th:value="${name}"
+                      autocomplete="name" list="ItemList"
                     />
                   </div>
+                  <datalist id="ItemList">
+								<option th:each="item:${itemList}" th:value="${item.name}"></option>
+								</datalist>
                 </div>
                 <div class="text-center">
                   <button type="submit" value="検索" class="btn btn-primary">
@@ -116,6 +121,7 @@
                   </button>
                 </div>
               </form>
+
               <div class="panel-heading">
                 <div class="panel-title">商品の並び替え</div>
               </div>
