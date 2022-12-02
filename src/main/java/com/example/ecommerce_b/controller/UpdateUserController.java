@@ -82,10 +82,11 @@ public class UpdateUserController {
 	 * @return パスワード変更画面
 	 */
 	@GetMapping("/insertPage")
-	public String insertPage(String token) {
+	public String insertPage(String token, Model model) {
 		User user = updateUserService.findByHash(token);
 		session.setAttribute("userId", user.getId());
 		session.setAttribute("userName", user.getName());
+		session.setAttribute("token", token);
 		return "update_password";
 	}
 
@@ -99,10 +100,10 @@ public class UpdateUserController {
 	 * @return 完了画面
 	 */
 	@PostMapping("/pass")
-	public String pass(String password, String newPassword, String confirm, Model model) {
+	public String pass(String password, String newPassword, String confirm, Model model, String token) {
 		if (!newPassword.equals(confirm)) {
 			model.addAttribute("updateError", "パスワードが違います");
-			return updatePass(model);
+			return insertPage(token, model);
 		}
 		updateUserService.updatePassword(password, newPassword);
 		return "redirect:/complete";
