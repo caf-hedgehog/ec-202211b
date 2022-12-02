@@ -69,6 +69,9 @@ public class Order {
 	}
 
 	public Integer getTotalPrice() {
+		for(int i = 0; i < orderItemList.size(); i++) {
+			orderItemList.get(i).getSubTotal();
+		}
 		return totalPrice;
 	}
 

@@ -8,6 +8,7 @@ import com.example.ecommerce_b.domain.Item;
 import com.example.ecommerce_b.domain.Order;
 import com.example.ecommerce_b.domain.OrderItem;
 import com.example.ecommerce_b.domain.OrderTopping;
+import com.example.ecommerce_b.domain.Topping;
 import com.example.ecommerce_b.form.AddCartForm;
 import com.example.ecommerce_b.repository.ItemRepository;
 import com.example.ecommerce_b.repository.OrderItemRepository;
@@ -43,7 +44,7 @@ public class AddCartService {
 	 * @param userId ユーザーID
 	 */
 	public void AddOrder(AddCartForm form, Integer userId) {
-		Item item = itemRepository.load(form.getItemId());// form.getItemId()
+		Item item = itemRepository.load(form.getItemId());
 		Order order = new Order();
 		order.setUserId(userId);
 		order.setTotalPrice(0);
@@ -60,11 +61,11 @@ public class AddCartService {
 		OrderTopping orderTopping = new OrderTopping();
 		if (form.getToppingIdList() != null) {
 			for (int i = 0; i < form.getToppingIdList().size(); i++) {
-				orderTopping = new OrderTopping(null, form.getToppingIdList().get(i), orderItem.getId(),
-						toppingRepository.load(form.getToppingIdList().get(i)));
+				Topping topping = toppingRepository.load(form.getToppingIdList().get(i));
+				orderTopping = new OrderTopping(null, form.getToppingIdList().get(i), orderItem.getId(), topping);
 				orderToppingRepository.insert(orderTopping);// 回す
 			}
-		} 
+		}
 	}
 
 }

@@ -40,8 +40,13 @@ public class OrderItem {
 		List<OrderTopping> orderToppingList = new ArrayList<>();
 		int subTotal = 0;
 		for (int i = 0; i < orderToppingList.size(); i++) {
-			subTotal += orderToppingList.get(i).getTopping().getPriceL();
-			subTotal += orderToppingList.get(i).getTopping().getPriceM();
+			if (this.size == 'L') {
+				subTotal += orderToppingList.get(i).getTopping().getPriceL();
+				subTotal += item.getPriceL();
+			} else if (this.size == 'M') {
+				subTotal += orderToppingList.get(i).getTopping().getPriceM();
+				subTotal += item.getPriceM();
+			}
 		}
 		return subTotal;
 	}
