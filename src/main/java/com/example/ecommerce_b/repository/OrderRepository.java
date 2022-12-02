@@ -88,4 +88,15 @@ public class OrderRepository {
 		template.update(sql, param);
 	}
 
+	/** coding by shibata */
+	public List<Order> findByUserId(Integer userId) {
+		String sql = "SELECT id, user_id, status, total_price, order_date, destination_name, destination_email, destination_zipcode, destination_address, destination_tel, delivery_time, payment_method FROM orders WHERE user_id = :userId AND status >= 1 ORDER BY id DESC";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("userId", userId);
+		List<Order> orderList = template.query(sql, param, ORDER_ROW_MAPPER);
+		if (orderList.size() == 0) {
+			return null;
+		}
+		return orderList;
+	}
+
 }
