@@ -37,9 +37,11 @@ public class MailSenderService {
 	public void send() {
 		// トークンの生成
 		String token = repository.findById((Integer) session.getAttribute("userId")).getPassword();
+		// メールアドレス検索
+		String email = repository.findById((Integer) session.getAttribute("userId")).getEmail();
 
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo("kensyou.happy.tarou@gmail.com");// 決め打ちになっているので登録したメールアドレスを格納する
+		message.setTo(email);// 決め打ちになっているので登録したメールアドレスを格納する
 		message.setFrom("sample@example.com");
 		message.setSubject("Test");
 
