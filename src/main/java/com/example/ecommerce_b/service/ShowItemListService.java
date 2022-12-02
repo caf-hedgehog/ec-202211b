@@ -1,6 +1,5 @@
 package com.example.ecommerce_b.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,51 +26,25 @@ public class ShowItemListService {
 	 * item情報を全件検索する業務処理と商品名を曖昧検索する業務処理.
 	 * 
 	 * @param name 商品名
-	 * @return　商品リスト
+	 * @return 商品リスト
 	 */
-	public List<List<Item>> searchByName(String name) {
-		List<Item> itemList = null;
-		
+	public List<Item> searchByName(String name) {
 		if (name == null) {
-			itemList = itemRepository.findAll();
-		} else {
-			itemList = itemRepository.findByName(name);
+			List<Item> itemList = itemRepository.findAll();
+			return itemList;
 		}
-		
-		List<List<Item>> itemListList = createItemListList(itemList);
-
-		return itemListList;
+		List<Item> itemList = itemRepository.findByName(name);
+		return itemList;
 	}
 
-
-	
 	/**
 	 * 商品の並び順を価格の高い順、低い順で並び替える.
 	 * 
 	 * @param order
-	 * @return　商品一覧
+	 * @return 商品一覧
 	 */
-	public List<List<Item>> itemSort(String sort) {
+	public List<Item> itemSort(String sort) {
 		List<Item> itemList = itemRepository.findAll(sort);
-		
-		List<List<Item>> itemListList = createItemListList(itemList);
-		
-		return itemListList;
+		return itemList;
 	}
-	
-	
-	
-	private List<List<Item>> createItemListList(List<Item> itemList) {
-		List<List<Item>> itemListList = new ArrayList<>();
-		List<Item> threeItemList = new ArrayList<>();
-		for(int i = 0; i < itemList.size(); i++) {
-			if(i % 3 == 0) {
-				threeItemList = new ArrayList<>();
-				itemListList.add(threeItemList);
-			}
-			threeItemList.add(itemList.get(i));
-		}
-		return itemListList;
-	}
-
 }
