@@ -1,5 +1,8 @@
 package com.example.ecommerce_b.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,8 +51,15 @@ public class AddCartController {
 	 */
 	@PostMapping("/cart-add")
 	public String addCart(AddCartForm form, Integer userId, Model model) {
+		String num = session.getAttribute(session.getId()).toString();
+		List<String> itemId = new ArrayList<>();
 		if (session.getAttribute("userId") == null) {
-			return "please-login";
+			itemId.add(num);
+			itemId.add(form.getItemId().toString());
+			session.setAttribute(session.getId(), itemId);
+			Integer nums = session.hashCode();
+			System.out.println(session.hashCode());
+			return "redirect:/login";
 		}
 		addCartService.AddOrder(form, userId);
 		return "redirect:/show-cart";
