@@ -1,5 +1,6 @@
 package com.example.ecommerce_b.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,9 @@ public class ShowItemListController {
 
 	@GetMapping("")
 	public String index(Model model) {
-		List<List<Item>> itemListList = showItemListService.searchByName(null);
+		List<Item> itemList = showItemListService.searchByName(null);
+		model.addAttribute("itemList", itemList);
+		List<List<Item>> itemListList = createItemListList(itemList);
 		model.addAttribute("itemListList", itemListList);
 		return "item_list_curry";
 	}
@@ -41,7 +44,9 @@ public class ShowItemListController {
 	 */
 	@RequestMapping("/showList")
 	public String showList(String itemName, Model model) {
-		List<List<Item>> itemListList = showItemListService.searchByName(itemName);
+		List<Item> itemList = showItemListService.searchByName(itemName);
+		model.addAttribute("itemList", itemList);
+		List<List<Item>> itemListList = createItemListList(itemList);
 		model.addAttribute("itemListList", itemListList);
 		return "item_list_curry";
 	}
@@ -55,9 +60,30 @@ public class ShowItemListController {
 	 */
 	@PostMapping("/itemSort")
 	public String itemSort(String sort, Model model) {
-		List<List<Item>> itemListList = showItemListService.itemSort(sort);
+		List<Item> itemList = showItemListService.itemSort(sort);
+		model.addAttribute("itemList", itemList);
+		List<List<Item>> itemListList = createItemListList(itemList);
 		model.addAttribute("itemListList", itemListList);
 		return "item_list_curry";
+	}
+
+	/**
+	 * 商品一覧が格納されているitemListを2重リストでitemListListに3個ずつ格納し商品一覧の表示を3列ずつ表記する.
+	 * 
+	 * @param itemList 商品一覧
+	 * @return 商品一覧を3つずつ格納したリスト
+	 */
+	private List<List<Item>> createItemListList(List<Item> itemList) {
+		List<List<Item>> itemListList = new ArrayList<>();
+		List<Item> threeItemList = new ArrayList<>();
+		for (int i = 0; i < itemList.size(); i++) {
+			if (i % 3 == 0) {
+				threeItemList = new ArrayList<>();
+				itemListList.add(threeItemList);
+			}
+			threeItemList.add(itemList.get(i));
+		}
+		return itemListList;
 	}
 
 }

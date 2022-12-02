@@ -71,8 +71,8 @@ public class UpdateUserController {
 	 */
 	@GetMapping("/update-password")
 	public String updatePass(Model model) {
-		mailSenderService.send();
-		return "update_finished";
+//		mailSenderService.send();
+		return "redirect:/send-email";
 	}
 
 	/**
@@ -116,8 +116,14 @@ public class UpdateUserController {
 	 */
 	@GetMapping("/complete")
 	public String done() {
-		mailSenderService.send();
+//		mailSenderService.send();
 		return "update_finished";
+	}
+
+	@GetMapping("/send-email")
+	public String sendEmail() {
+		mailSenderService.send();
+		return "update_password_finished";
 	}
 
 }
