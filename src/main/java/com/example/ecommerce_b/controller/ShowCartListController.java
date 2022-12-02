@@ -26,6 +26,12 @@ public class ShowCartListController {
 	@Autowired
 	private HttpSession session;
 
+	/**
+	 * カートリスト表示.
+	 * 
+	 * @param model リクエストパラメータ
+	 * @return カートリストページ
+	 */
 	@GetMapping("")
 	public String index(Model model) {
 		if (session.getAttribute("userId") != null) {

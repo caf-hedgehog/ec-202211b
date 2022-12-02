@@ -47,7 +47,11 @@ public class ShowCartListService {
 	 */
 	public Order showCartList(Integer userId, Integer status) {
 		// ユーザーIDとステータスから注文前の情報を取得
-		Order order = orderRepository.findByStatusAndUserId(status, userId).get(0);
+		List<Order> orderList = orderRepository.findByStatusAndUserId(status, userId);
+		if (orderList == null) {
+			return null;
+		}
+		Order order = orderList.get(0);
 
 		// 注文商品リストにオーダーIDと一致する商品を取得
 		List<OrderItem> orderItemList = orderItemRepository.findByOrderId(order.getId());

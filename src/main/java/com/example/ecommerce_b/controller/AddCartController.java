@@ -28,18 +28,33 @@ public class AddCartController {
 	@Autowired
 	private HttpSession session;
 
+	/**
+	 * 商品詳細ページ.
+	 * 
+	 * @return
+	 */
 	@GetMapping("")
 	public String index() {
 		return "item_detail";
 	}
 
+	/**
+	 * カート追加.
+	 * 
+	 * @param form   カートフォーム
+	 * @param userId ユーザーID
+	 * @param model  リクエストパラメータ
+	 * @return カート画面
+	 */
 	@PostMapping("/cart-add")
 	public String addCart(AddCartForm form, Integer userId, Model model) {
 		if (session.getAttribute("userId") == null) {
-			return "/login";
+			return "please-login";
 		}
 		addCartService.AddOrder(form, userId);
 		return "redirect:/show-cart";
 	}
+
+//	@GetMapping("/")
 
 }

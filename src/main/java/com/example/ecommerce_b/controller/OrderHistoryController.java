@@ -29,20 +29,32 @@ public class OrderHistoryController {
 	@Autowired
 	private HttpSession session;
 
-	/**
-	 * 注文履歴表示.
-	 * 
-	 * @param model リクエストパラメータ
-	 * @return 注文履歴。 ログインしていない場合はログい画面に戻る
-	 */
+//
+//	/**
+//	 * 注文履歴表示.
+//	 * 
+//	 * @param model リクエストパラメータ
+//	 * @return 注文履歴。 ログインしていない場合はログい画面に戻る
+//	 */
+//	@GetMapping("")
+//	public String showOrder(Model model) {
+//		if (session.getAttribute("userId") != null) {
+//			List<Order> orders = orderHistoryService.showOrderHistory((Integer) session.getAttribute("userId"), 1);// statusどうしよう。。。
+//			model.addAttribute("orders", orders);
+//			return "order-history";
+//		}
+//		return "/login";
+//	}
+//
+//}
 	@GetMapping("")
 	public String showOrder(Model model) {
 		if (session.getAttribute("userId") != null) {
-			List<Order> orders = orderHistoryService.showOrderHistory((Integer) session.getAttribute("userId"), 1);// statusどうしよう。。。
+			List<Order> orders = orderHistoryService.showOrderHistory((Integer) session.getAttribute("userId"));// statusどうしよう。。。
+
 			model.addAttribute("orders", orders);
 			return "order-history";
 		}
 		return "/login";
 	}
-
 }
