@@ -30,6 +30,7 @@ public class ShowCartListController {
 	public String index(Model model) {
 		if (session.getAttribute("userId") != null) {
 			Integer userId = (Integer) session.getAttribute("userId");
+			System.out.println(userId);
 			model.addAttribute("cartList", showCartListService.showCartList(userId, 0));
 			return "cart_list";
 		}
