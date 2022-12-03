@@ -123,7 +123,7 @@ public class UpdateUserController {
 
 	@GetMapping("/send-email")
 	public String sendEmail() {
-		mailSenderService.send();
+		mailSenderService.send("PASSWORD");
 		return "update_password_finished";
 	}
 
