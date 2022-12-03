@@ -99,4 +99,16 @@ public class OrderRepository {
 		return orderList;
 	}
 
+	/**
+	 * テーブルデータ削除.
+	 * 
+	 * @param userId ユーザーID
+	 * @param hashId ハッシュ化されたセッションID
+	 */
+	public void delete(Integer userId, Integer hashId) {
+		String sql = "DELETE FROM orders WHERE id=:hashId";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("hashId", hashId);
+		template.update(sql, param);
+	}
+
 }

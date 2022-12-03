@@ -48,20 +48,11 @@ public class AddCartController {
 	 */
 	@PostMapping("/cart-add")
 	public String addCart(AddCartForm form, Integer userId, Model model) {
-//		String num = session.getAttribute(session.getId()).toString();
-//		List<String> itemId = new ArrayList<>();
 		if (session.getAttribute("userId") == null) {
-//			itemId.add(num);
-//			itemId.add(form.getItemId().toString());
-//			session.setAttribute(session.getId(), itemId);
-//			Integer nums = session.hashCode();
-//			System.out.println(session.hashCode());
-			return "redirect:/login";
+			addCartService.AddOrder(form, Math.abs(session.getId().hashCode()));
+			return "redirect:/show-cart";
 		}
 		addCartService.AddOrder(form, userId);
 		return "redirect:/show-cart";
 	}
-
-//	@GetMapping("/")
-
 }
