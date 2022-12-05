@@ -1,5 +1,7 @@
 package com.example.ecommerce_b.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ public class ShowItemDetailController {
 
 	@Autowired
 	private ShowItemDetailService showItemDetailService;
+	@Autowired
+	private HttpSession session;
 
 	/**
 	 * トッピング情報を受け取り商品詳細画面へ遷移.
@@ -33,6 +37,7 @@ public class ShowItemDetailController {
 	public String showItemDetail(Integer id, Model model) {
 		Item item = showItemDetailService.detailByItem(id);
 		model.addAttribute("item", item);
+		System.out.println(session.getId());
 		return "item_detail";
 
 	}

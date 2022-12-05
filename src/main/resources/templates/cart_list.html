@@ -102,7 +102,27 @@
                       </ul>
                     </td>
                     <td>
-                      <div class="text-center">3,280円</div>
+                      <div
+                        class="text-center"
+                        th:with="ItempriceM=${cartDetail.item.priceM},
+                        ItempriceL=${cartDetail.item.priceL},
+                        toppingPriceM=0,
+                        toppingPriceL=0"
+                      >
+                        <span th:if="${cartDetail.size} == 'M'">
+                          <span
+                            th:text="${#numbers.formatInteger(ItempriceM + toppingPriceM, 0, 'COMMA')}"
+                          ></span
+                          >円
+                        </span>
+                        <span th:if="${cartDetail.size} == 'L'">
+                          <span
+                            th:text="${#numbers.formatInteger(ItempriceL + toppingPriceL, 0, 'COMMA')}"
+                          ></span
+                          >円
+                        </span>
+                        &nbsp;&nbsp;
+                      </div>
                     </td>
                     <td>
                       <div class="text-center">

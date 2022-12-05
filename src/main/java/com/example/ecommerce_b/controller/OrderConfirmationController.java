@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.ecommerce_b.form.OrderConfirmationForm;
+import com.example.ecommerce_b.service.MailSenderService;
 import com.example.ecommerce_b.service.OrderConfirmationService;
 
 /**
@@ -23,10 +24,13 @@ import com.example.ecommerce_b.service.OrderConfirmationService;
 public class OrderConfirmationController {
 
 	@Autowired
-	OrderConfirmationService service;
+	private OrderConfirmationService service;
 
 	@Autowired
-	ShowOrderConfirmController controller;
+	private ShowOrderConfirmController controller;
+
+	@Autowired
+	private MailSenderService mailSenderService;
 
 	/**
 	 * 注文完了画面に遷移.
@@ -36,6 +40,7 @@ public class OrderConfirmationController {
 	 */
 	@GetMapping("")
 	public String index(OrderConfirmationForm form) {
+		mailSenderService.send("FINISH");
 		return "order_finished";
 	}
 

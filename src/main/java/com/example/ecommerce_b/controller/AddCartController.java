@@ -49,12 +49,10 @@ public class AddCartController {
 	@PostMapping("/cart-add")
 	public String addCart(AddCartForm form, Integer userId, Model model) {
 		if (session.getAttribute("userId") == null) {
-			return "please-login";
+			addCartService.AddOrder(form, Math.abs(session.getId().hashCode()));
+			return "redirect:/show-cart";
 		}
 		addCartService.AddOrder(form, userId);
 		return "redirect:/show-cart";
 	}
-
-//	@GetMapping("/")
-
 }
