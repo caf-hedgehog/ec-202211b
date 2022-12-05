@@ -64,13 +64,13 @@
                    &nbsp;&nbsp;
                   <span th:if="${itemList.size} == 'M'">
                     <span
-                      th:text="${itemList.item.priceM}"
+                      th:text="${#numbers.formatInteger(itemList.item.priceM, 0, 'COMMA')}"
                     ></span
                     >円
                   </span>
                   <span th:if="${itemList.size} == 'L'">
                     <span
-                      th:text="${itemList.item.priceL}"
+                      th:text="${#numbers.formatInteger(itemList.item.priceL, 0, 'COMMA')}"
                     ></span
                     >円
                   </span>
